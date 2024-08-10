@@ -15,7 +15,7 @@ required: true,
 ```
 
 4. In AuthLayout there is\
-   By default `authnetication` is true even if user doesn't send anything. In `if` condition we check if there is mismatch with `authentication` and `authStatus` which comes from redux-store, if authStatus is false then `true && false!==true` gives `true` then redirected to login page.
+   By default `authnetication` is `true` even if user doesn't send anything. In `if` condition we check if `authentication` is not equal to `authStatus` which comes from redux-store, if `authStatus==false` then `true && false!==true => true && true` gives `true` then redirected to login page cuz not authenticated. In `elseif` we check for `!authentication` which gives `false` and if `authStatus==true` then `true!==true => false` then `false && false`
 
 ```javascript
 useEffect(() => {

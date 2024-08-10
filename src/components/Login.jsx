@@ -12,7 +12,7 @@ function Login() {
     const { register, handleSubmit } = useForm();
     const [errorMsg, setErrorMsg] = useState('');
 
-    const handleLogin = async data => {
+    const handleLogin = async (data) => {
         setErrorMsg('');
         try {
             const session = await authService.login(data);
@@ -60,7 +60,7 @@ function Login() {
                             {...register('email', {
                                 required: true,
                                 validate: {
-                                    matchPatern: value =>
+                                    matchPatern: (value) =>
                                         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
                                             value,
                                         ) ||

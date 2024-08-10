@@ -8,8 +8,10 @@ import Container from './container/Container';
 import Logo from './Logo';
 import Button from './Button';
 import PostCard from './PostCard';
-import Input from 'postcss/lib/input';
+import Input from './Input';
 import Login from './Login';
+import SignUp from './SignUp';
+import RTE from './RTE';
 export {
     Header,
     Footer,
@@ -20,4 +22,6 @@ export {
     PostCard,
     Input,
     Login,
+    SignUp,
+    RTE,
 };
