@@ -1,31 +1,33 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login as authLogin } from '../store/authSlice';
+import { login as storeLogin } from '../store/authSlice';
 import { Button, Input, Logo } from './index';
 import { useDispatch } from 'react-redux';
-import authService from '../appwrite/auth';
 import { useForm } from 'react-hook-form';
-
-function Login() {
+import authService from '../appwrite/auth';
+const SignUp = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const { register, handleSubmit } = useForm();
     const [errorMsg, setErrorMsg] = useState('');
+    const { register, handleSubmit } = useForm();
 
-    const handleLogin = async data => {
+    //data comes from react-hook-form when submitted
+    const handleSignUp = async data => {
+        console.log(data);
+
         setErrorMsg('');
         try {
-            const session = await authService.login(data);
-            if (session) {
-                const userData = await authService.getCurrentUser();
-                if (userData) dispatch(authLogin(userData));
+            //this returns a session
+            const newUserData = authService.createAccount(data);
+            if (newUserData) {
+                const userData = authService.getCurrentUser();
+                if (userData) dispatch(storeLogin(userData));
                 navigate('/');
             }
         } catch (error) {
             setErrorMsg(error.message);
         }
     };
-
     return (
         <div className="flex items-center justify-center w-full">
             <div
@@ -48,19 +50,29 @@ function Login() {
                         Sign Up
                     </Link>
                 </p>
+
                 {errorMsg && (
                     <p className="text-red-600 mt-8 text-center">{errorMsg}</p>
                 )}
-                <form onSubmit={handleSubmit(handleLogin)} className="mt-8">
-                    <div className="space-y-5">
+                <form action={handleSubmit(handleSignUp)} className="mt-8">
+                    <div className="mt-8">
+                        <Input
+                            label="Full Name: "
+                            type="text"
+                            placeholder="Enter your Full Name"
+                            {...register('name', {
+                                required: true,
+                            })}
+                        />
                         <Input
                             label="Email: "
-                            placeholder="Enter your email"
                             type="email"
+                            placeholder="Enter your Email address"
                             {...register('email', {
                                 required: true,
                                 validate: {
-                                    matchPatern: value =>
+                                    //matchPattern is a custom arrow function
+                                    matchPattern: value =>
                                         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
                                             value,
                                         ) ||
@@ -71,19 +83,19 @@ function Login() {
                         <Input
                             label="Password: "
                             type="password"
-                            placeholder="Enter your password"
+                            placeholder="Enter your Password"
                             {...register('password', {
                                 required: true,
                             })}
                         />
-                        <Button type="submit" className="w-full">
-                            Sign in
+                        <Button className="w-full" type="submit">
+                            Sign Up
                         </Button>
                     </div>
                 </form>
             </div>
         </div>
     );
-}
+};
 
-export default Login;
+export default SignUp;
