@@ -1,13 +1,13 @@
 import React, { useEffect, useCallback } from 'react';
-import { Button, RTE, Input, Select } from './index';
-import appwritePostService from '../appwrite/post';
-import appwriteFileService from '../appwrite/file';
-// import { useNavigate } from 'react-router-dom';
+import { Button, RTE, Input, Select } from '../index';
+import appwritePostService from '../../appwrite/post';
+import appwriteFileService from '../../appwrite/file';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 const PostForm = ({ post }) => {
     const userData = useSelector((store) => store.auth.userData);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const { register, watch, handleSubmit, setValue, control, getValues } =
         useForm({
             defaultValues: {
@@ -20,8 +20,6 @@ const PostForm = ({ post }) => {
 
     //data comes from react-hook-fom when submitted
     const submitPost = async (data) => {
-        console.log(data);
-
         //if there is already existing post then it should be updated, use appWrite file and post Service
         if (post) {
             // upload the new updated file
@@ -36,7 +34,7 @@ const PostForm = ({ post }) => {
                 ...data,
                 featuredImage: file ? file.$id : undefined,
             });
-            // if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
+            if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
         } else {
             //else create a new post
 
@@ -50,7 +48,7 @@ const PostForm = ({ post }) => {
                     featuredImage: dbNewFile.$id,
                     userId: userData.$id,
                 });
-                // if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
+                if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
             }
         }
     };

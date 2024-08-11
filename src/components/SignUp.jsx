@@ -5,14 +5,14 @@ import { Button, Input, Logo } from './index';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import authService from '../appwrite/auth';
-const SignUp = () => {
+const Signup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [errorMsg, setErrorMsg] = useState('');
     const { register, handleSubmit } = useForm();
 
     //data comes from react-hook-form when submitted
-    const handleSignUp = async data => {
+    const handleSignUp = async (data) => {
         console.log(data);
 
         setErrorMsg('');
@@ -54,7 +54,7 @@ const SignUp = () => {
                 {errorMsg && (
                     <p className="text-red-600 mt-8 text-center">{errorMsg}</p>
                 )}
-                <form action={handleSubmit(handleSignUp)} className="mt-8">
+                <form onSubmit={handleSubmit(handleSignUp)} className="mt-8">
                     <div className="mt-8">
                         <Input
                             label="Full Name: "
@@ -72,7 +72,7 @@ const SignUp = () => {
                                 required: true,
                                 validate: {
                                     //matchPattern is a custom arrow function
-                                    matchPattern: value =>
+                                    matchPattern: (value) =>
                                         /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
                                             value,
                                         ) ||
@@ -98,4 +98,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Signup;

@@ -45,6 +45,6 @@ class FileService {
     }
 }
 
-const fileService = new FileService();
+const appwriteFileService = new FileService();
 
-export default fileService;
+export default appwriteFileService;

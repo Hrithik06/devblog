@@ -26,3 +26,10 @@ useEffect(() => {
     }
 }, [authStatus, authentication, navigate]);
 ```
+
+5. What is control and Controller?\
+   `control` comes from react-hook-form it is responsible to take data from RTE to the PostForm. The control of the RTE or any element is passed on to the parent which calls its. Wrap the DOM element to be controlled inside.
+    ```javascript
+    <Controller control={control}  name="" render={({ field: { onChange } }) => (<div onChange={onChange}></div>)}
+    ```
+    Controller has name, control and render(which returns the element, and attaches the event) takes a callback function. In `field` we mention the type of event to be tracked, `onChange` tracks changes in the DOM element. onChange from Controller field is a function which sends the input's value to the library. It should be assigned to the onChange prop of the input and value should not be undefined. In case of RTE `onEditorChange={onChange0`

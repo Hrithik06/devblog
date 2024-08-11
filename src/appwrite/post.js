@@ -83,6 +83,6 @@ class PostService {
     }
 }
 
-const postService = new PostService();
+const appwritePostService = new PostService();
 
-export default postService;
+export default appwritePostService;

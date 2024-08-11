@@ -10,8 +10,9 @@ import Button from './Button';
 import PostCard from './PostCard';
 import Input from './Input';
 import Login from './Login';
-import SignUp from './SignUp';
+import Signup from './Signup';
 import RTE from './RTE';
+import Select from './Select';
 export {
     Header,
     Footer,
@@ -22,6 +23,7 @@ export {
     PostCard,
     Input,
     Login,
-    SignUp,
+    Signup,
     RTE,
+    Select,
 };
