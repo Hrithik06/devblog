@@ -1,12 +1,12 @@
-import React, { useId } from 'react';
+import React, { useId, forwardRef } from 'react';
 
-const Input = React.forwardRef(
+const Input = forwardRef(
     ({ label, type = 'text', className = '', ...props }, ref) => {
         const id = useId();
         return (
-            <div className="w-full">
+            <div className="w-full flex flex-col">
                 {label && (
-                    <label className="inline-block mb-1 pl-1" htmlFor={id}>
+                    <label className="inline-block mb-1.5" htmlFor={id}>
                         {label}
                     </label>
                 )}

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { login as authLogin } from '../store/authSlice';
 import { Button, Input, Logo } from './index';
 import { useDispatch } from 'react-redux';
-import authService from '../appwrite/auth';
+import appwriteAuthService from '../appwrite/auth';
 import { useForm } from 'react-hook-form';
 
 function Login() {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [errorMsg, setErrorMsg] = useState('');
@@ -15,10 +16,12 @@ function Login() {
     const handleLogin = async (data) => {
         setErrorMsg('');
         try {
-            const session = await authService.login(data);
+            const session = await appwriteAuthService.login(data);
             if (session) {
-                const userData = await authService.getCurrentUser();
+                const userData = await appwriteAuthService.getCurrentUser();
                 if (userData) dispatch(authLogin(userData));
+                // const redirectTo = location.state?.from || '/';
+                // navigate(redirectTo, { replace: true });
                 navigate('/');
             }
         } catch (error) {
@@ -31,6 +34,21 @@ function Login() {
             <div
                 className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
             >
+                {/* <div className="text-right">
+                    <Button
+                        className=""
+                        onClick={() => navigate(location.state?.from?.pathname)}
+                    >
+                        X
+                    </Button>
+                </div> */}
+                <Button
+                    className=""
+                    onClick={() => navigate(location.state?.from?.pathname)}
+                >
+                    Go Back
+                </Button>
+
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
                         <Logo width="100%" />
@@ -54,9 +72,10 @@ function Login() {
                 <form onSubmit={handleSubmit(handleLogin)} className="mt-8">
                     <div className="space-y-5">
                         <Input
-                            label="Email: "
-                            placeholder="Enter your email"
+                            label="Email"
+                            placeholder="johndoe@abc.com"
                             type="email"
+                            className="p-2 rounded-lg"
                             {...register('email', {
                                 required: true,
                                 validate: {
@@ -69,9 +88,10 @@ function Login() {
                             })}
                         />
                         <Input
-                            label="Password: "
+                            label="Password"
                             type="password"
-                            placeholder="Enter your password"
+                            placeholder="Enter password"
+                            className="p-2 rounded-lg"
                             {...register('password', {
                                 required: true,
                             })}

@@ -32,7 +32,7 @@ const PostForm = ({ post }) => {
             }
             const dbEditPost = await appwritePostService.updatePost(post?.$id, {
                 ...data,
-                featuredImage: file ? file.$id : undefined,
+                featuredImage: dbNewFile ? dbNewFile.$id : undefined,
             });
             if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
         } else {
@@ -42,7 +42,10 @@ const PostForm = ({ post }) => {
             const dbNewFile = await appwriteFileService.uploadFile(
                 data.image[0],
             );
+
             if (dbNewFile) {
+                console.log(userData);
+
                 const dbNewPost = await appwritePostService.createPost({
                     ...data,
                     featuredImage: dbNewFile.$id,
@@ -68,7 +71,7 @@ const PostForm = ({ post }) => {
         //name: name of the input field which is `title`
         const subscription = watch((value, { name }) => {
             if (name === 'title') {
-                setValue('slug', slugTransform(value), {
+                setValue('slug', slugTransform(value?.title), {
                     shouldValidate: true,
                 });
             }
@@ -117,7 +120,7 @@ const PostForm = ({ post }) => {
                 {post && (
                     <div className="w-full mb-4">
                         <img
-                            src={appwriteService.getFilePreview(
+                            src={appwriteFileService.getFilePreview(
                                 post.featuredImage,
                             )}
                             alt={post.title}

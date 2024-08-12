@@ -5,25 +5,30 @@ import LogoutBtn from './Header/LogoutBtn';
 
 import Container from './container/Container';
 
-import Logo from './Logo';
+import PostForm from './post-form/PostForm';
+
+import AuthLayout from './AuthLayout';
 import Button from './Button';
-import PostCard from './PostCard';
 import Input from './Input';
 import Login from './Login';
-import Signup from './Signup';
+import Logo from './Logo';
+import PostCard from './PostCard';
 import RTE from './RTE';
 import Select from './Select';
+import Signup from './Signup';
 export {
-    Header,
     Footer,
-    Container,
+    Header,
     LogoutBtn,
-    Logo,
+    Container,
+    PostForm,
+    AuthLayout,
     Button,
-    PostCard,
     Input,
     Login,
-    Signup,
+    Logo,
+    PostCard,
     RTE,
     Select,
+    Signup,
 };

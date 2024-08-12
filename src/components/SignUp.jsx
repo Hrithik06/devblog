@@ -4,7 +4,7 @@ import { login as storeLogin } from '../store/authSlice';
 import { Button, Input, Logo } from './index';
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import authService from '../appwrite/auth';
+import appwriteAuthService from '../appwrite/auth';
 const Signup = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -13,14 +13,12 @@ const Signup = () => {
 
     //data comes from react-hook-form when submitted
     const handleSignUp = async (data) => {
-        console.log(data);
-
         setErrorMsg('');
         try {
             //this returns a session
-            const newUserData = authService.createAccount(data);
+            const newUserData = appwriteAuthService.createAccount(data);
             if (newUserData) {
-                const userData = authService.getCurrentUser();
+                const userData = appwriteAuthService.getCurrentUser();
                 if (userData) dispatch(storeLogin(userData));
                 navigate('/');
             }
@@ -39,15 +37,15 @@ const Signup = () => {
                     </span>
                 </div>
                 <h2 className="text-center text-2xl font-bold leading-tight">
-                    Sign in to your account
+                    Create account
                 </h2>
                 <p className="mt-2 text-center text-base text-black/60">
-                    Don&apos;t have any account?&nbsp;
+                    Already have an account?&nbsp;
                     <Link
-                        to="/signup"
+                        to="/login"
                         className="font-medium text-primary transition-all duration-200 hover:underline"
                     >
-                        Sign Up
+                        Sign In
                     </Link>
                 </p>
 
@@ -57,17 +55,19 @@ const Signup = () => {
                 <form onSubmit={handleSubmit(handleSignUp)} className="mt-8">
                     <div className="mt-8">
                         <Input
-                            label="Full Name: "
+                            label="Name"
                             type="text"
-                            placeholder="Enter your Full Name"
+                            placeholder="John Doe"
+                            className="p-2 rounded-lg"
                             {...register('name', {
                                 required: true,
                             })}
                         />
                         <Input
-                            label="Email: "
+                            label="Email"
                             type="email"
-                            placeholder="Enter your Email address"
+                            placeholder="johndoe@abc.com"
+                            className="p-2 rounded-lg"
                             {...register('email', {
                                 required: true,
                                 validate: {
@@ -81,9 +81,10 @@ const Signup = () => {
                             })}
                         />
                         <Input
-                            label="Password: "
+                            label="Password"
                             type="password"
-                            placeholder="Enter your Password"
+                            placeholder="Enter Password"
+                            className="p-2 rounded-lg"
                             {...register('password', {
                                 required: true,
                             })}

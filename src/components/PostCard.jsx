@@ -9,7 +9,7 @@ const PostCard = ({ $id, title, featuredImage }) => {
                     <img
                         src={fileService.getFilePreview(featuredImage)}
                         alt={title}
-                        className="rounded-xl"
+                        className="rounded-lg"
                     />
                 </div>
                 <h2 className="font-bold text-xl">{title}</h2>

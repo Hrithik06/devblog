@@ -4,7 +4,7 @@ import { Logo, Container, LogoutBtn } from '../index';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 const Header = () => {
-    const authStatus = useSelector(store => store.auth.status);
+    const authStatus = useSelector((store) => store.auth.status);
     const navigate = useNavigate();
     const navItems = [
         {
@@ -18,7 +18,7 @@ const Header = () => {
             active: !authStatus,
         },
         {
-            name: 'Signup',
+            name: 'Sign up for free',
             slug: '/signup',
             active: !authStatus,
         },
@@ -43,7 +43,7 @@ const Header = () => {
                         </Link>
                     </div>
                     <ul className="flex ml-auto">
-                        {navItems.map(item =>
+                        {navItems.map((item) =>
                             item.active ? (
                                 <li key={item.name}>
                                     <button
