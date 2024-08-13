@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Logo, Container, LogoutBtn } from '../index';
+import { Logo, Container, LogoutBtn, Button } from '../index';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 const Header = () => {
     const authStatus = useSelector((store) => store.auth.status);
+    const userData = useSelector((store) => store.auth.userData);
+
     const navigate = useNavigate();
     const navItems = [
         {
@@ -33,6 +35,9 @@ const Header = () => {
             active: authStatus,
         },
     ];
+    // useEffect(() => {
+    //     if (userData) console.log(userData);
+    // }, [userData, navigate, authStatus]);
     return (
         <header className="py-3 shadow bg-gray-500">
             <Container>
@@ -58,6 +63,11 @@ const Header = () => {
                         {authStatus && (
                             <li>
                                 <LogoutBtn />
+                            </li>
+                        )}
+                        {authStatus && (
+                            <li>
+                                <Button children={userData?.name} />
                             </li>
                         )}
                     </ul>

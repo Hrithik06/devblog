@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 function Login() {
     const navigate = useNavigate();
     const location = useLocation();
+
     const dispatch = useDispatch();
     const { register, handleSubmit } = useForm();
     const [errorMsg, setErrorMsg] = useState('');
@@ -18,11 +19,16 @@ function Login() {
         try {
             const session = await appwriteAuthService.login(data);
             if (session) {
-                const userData = await appwriteAuthService.getCurrentUser();
-                if (userData) dispatch(authLogin(userData));
-                // const redirectTo = location.state?.from || '/';
-                // navigate(redirectTo, { replace: true });
-                navigate('/');
+                const user = await appwriteAuthService.getCurrentUser();
+
+                if (user) {
+                    console.log(user);
+
+                    dispatch(authLogin(user));
+                    const redirectTo = location.state?.from || '/';
+                    navigate(redirectTo, { replace: true });
+                    navigate('/');
+                }
             }
         } catch (error) {
             setErrorMsg(error.message);
@@ -42,12 +48,6 @@ function Login() {
                         X
                     </Button>
                 </div> */}
-                <Button
-                    className=""
-                    onClick={() => navigate(location.state?.from?.pathname)}
-                >
-                    Go Back
-                </Button>
 
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -61,7 +61,7 @@ function Login() {
                     Don&apos;t have any account?&nbsp;
                     <Link
                         to="/signup"
-                        className="font-medium text-primary transition-all duration-200 hover:underline"
+                        className="font-medium text-primary transition-all duration-200 text-blue-700 hover:underline"
                     >
                         Sign Up
                     </Link>

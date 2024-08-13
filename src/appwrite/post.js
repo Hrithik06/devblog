@@ -14,7 +14,15 @@ class PostService {
         // console.log(this.databases);
     }
     //slug is unique id
-    async createPost({ title, slug, content, featuredImage, status, userId }) {
+    async createPost({
+        title,
+        slug,
+        content,
+        featuredImage,
+        status,
+        userId,
+        author,
+    }) {
         console.log(content.substring(0, 100));
 
         try {
@@ -22,7 +30,7 @@ class PostService {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
-                { title, content, featuredImage, status, userId },
+                { title, content, featuredImage, status, userId, author },
             );
             if (newPost) {
                 await this.createFullContent(slug, content);
@@ -132,6 +140,8 @@ class PostService {
         }
     }
     async getFullContent(slug) {
+        console.log(slug);
+
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
@@ -139,7 +149,7 @@ class PostService {
                 slug,
             );
         } catch (error) {
-            console.log('Appwrite service :: getPost error ::  ', error);
+            console.log('Appwrite service :: getFullContent error ::  ', error);
             return null;
         }
     }

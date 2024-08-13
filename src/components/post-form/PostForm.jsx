@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 const PostForm = ({ post }) => {
     const userData = useSelector((store) => store.auth.userData);
+
     const navigate = useNavigate();
     const { register, watch, handleSubmit, setValue, control, getValues } =
         useForm({
@@ -21,39 +22,40 @@ const PostForm = ({ post }) => {
     //data comes from react-hook-fom when submitted
     const submitPost = async (data) => {
         //if there is already existing post then it should be updated, use appWrite file and post Service
-        if (post) {
-            // upload the new updated file
-            const dbNewFile = data?.image[0]
-                ? await appwriteFileService.uploadFile(data.image[0])
-                : null;
-            // delete the old linked file
-            if (dbNewFile) {
-                await appwriteFileService.deleteFile(post?.featuredImage);
-            }
-            const dbEditPost = await appwritePostService.updatePost(post?.$id, {
-                ...data,
-                featuredImage: dbNewFile ? dbNewFile.$id : undefined,
-            });
-            if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
-        } else {
-            //else create a new post
+        console.log(data.content, typeof data.content);
 
-            //store file returned by appwriteFileService
-            const dbNewFile = await appwriteFileService.uploadFile(
-                data.image[0],
-            );
+        // if (post) {
+        //     // upload the new updated file
+        //     const dbNewFile = data?.image[0]
+        //         ? await appwriteFileService.uploadFile(data.image[0])
+        //         : null;
+        //     // delete the old linked file
+        //     if (dbNewFile) {
+        //         await appwriteFileService.deleteFile(post?.featuredImage);
+        //     }
+        //     const dbEditPost = await appwritePostService.updatePost(post?.$id, {
+        //         ...data,
+        //         featuredImage: dbNewFile ? dbNewFile.$id : undefined,
+        //     });
+        //     if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
+        // } else {
+        //     //else create a new post
 
-            if (dbNewFile) {
-                console.log(userData);
+        //     //store file returned by appwriteFileService
+        //     const dbNewFile = await appwriteFileService.uploadFile(
+        //         data.image[0],
+        //     );
 
-                const dbNewPost = await appwritePostService.createPost({
-                    ...data,
-                    featuredImage: dbNewFile.$id,
-                    userId: userData.$id,
-                });
-                if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
-            }
-        }
+        //     if (dbNewFile) {
+        //         const dbNewPost = await appwritePostService.createPost({
+        //             ...data,
+        //             featuredImage: dbNewFile.$id,
+        //             userId: userData.$id,
+        //             author: userData.name,
+        //         });
+        //         if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
+        //     }
+        // }
     };
 
     const slugTransform = useCallback((value) => {
@@ -88,13 +90,13 @@ const PostForm = ({ post }) => {
                 <Input
                     label="Title :"
                     placeholder="Title"
-                    className="mb-4"
+                    className="mb-4 p-2 rounded-lg"
                     {...register('title', { required: true })}
                 />
                 <Input
                     label="Slug :"
                     placeholder="Slug"
-                    className="mb-4"
+                    className="mb-4 p-2 rounded-lg"
                     {...register('slug', { required: true })}
                     onInput={(e) => {
                         setValue('slug', slugTransform(e.currentTarget.value), {
@@ -111,9 +113,9 @@ const PostForm = ({ post }) => {
             </div>
             <div className="w-1/3 px-2">
                 <Input
-                    label="Featured Image :"
+                    label="Featured Image :(PNG, JPG, JPEG, GIF)"
                     type="file"
-                    className="mb-4"
+                    className="my-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     {...register('image', { required: !post })}
                 />
@@ -122,6 +124,12 @@ const PostForm = ({ post }) => {
                         <img
                             src={appwriteFileService.getFilePreview(
                                 post.featuredImage,
+                                {
+                                    width: 384,
+                                    height: 240,
+                                    gravity: 'ImageGravity.Center',
+                                    quality: 70,
+                                },
                             )}
                             alt={post.title}
                             className="rounded-lg"

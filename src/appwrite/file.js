@@ -1,5 +1,5 @@
 import conf from '../conf/conf';
-import { Client, Storage, ID } from 'appwrite';
+import { Client, Storage, ImageGravity, ID } from 'appwrite';
 
 class FileService {
     client = new Client();
@@ -36,9 +36,16 @@ class FileService {
         }
     }
     //no need of asyn-await here as it is very fast even in docs they aren't using
-    getFilePreview(fileId) {
+    getFilePreview(fileId, { width = 0, height = 0, quality = 0 } = {}) {
         try {
-            return this.storage.getFilePreview(conf.appwriteBucketId, fileId);
+            return this.storage.getFilePreview(
+                conf.appwriteBucketId,
+                fileId,
+                width,
+                height,
+                ImageGravity.Center,
+                quality,
+            );
         } catch (error) {
             console.log('Appwrite service :: getFilePreview error :: ', error);
         }

@@ -8,22 +8,45 @@ import { useSelector } from 'react-redux';
 
 export default function Post() {
     const [post, setPost] = useState(null);
+    const [fullContent, setFullContent] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
     const location = useLocation();
     const userData = useSelector((state) => state.auth.userData);
+    const authStatus = useSelector((state) => state.auth.status);
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
+        // console.log('hello', userData);
+
         if (slug) {
             appwritePostService.getPost(slug).then((post) => {
                 if (post) setPost(post);
                 else navigate('/');
             });
         } else navigate('/');
+
+        userData && fetchFullContent();
     }, [slug, navigate]);
 
+    const fetchFullContent = async () => {
+        console.log('fetchFullContent');
+
+        const mainContent = await appwritePostService.getFullContent(slug);
+        // console.log(mainContent);
+
+        setFullContent(mainContent);
+
+        // Create a new DOM parser
+        const parser = new DOMParser();
+        // Parse the string into a DOM Document
+        const doc = parser.parseFromString(mainContent, 'text/html');
+
+        // Select the second <div> element (first child of the first div)
+        const secondDivContent = doc.querySelectorAll('div > div')[1].innerHTML;
+        console.log(secondDivContent);
+    };
     const deletePost = () => {
         appwritePostService.deletePost(post.$id).then((status) => {
             if (status) {
@@ -31,6 +54,13 @@ export default function Post() {
                 navigate('/');
             }
         });
+    };
+
+    const loginToRead = async () => {
+        navigate('/login', {
+            state: { from: location },
+        });
+        // console.log(slug);
     };
 
     // if (!userData) {
@@ -58,6 +88,7 @@ export default function Post() {
                     <img
                         src={appwriteFileService.getFilePreview(
                             post.featuredImage,
+                            { quality: 80 },
                         )}
                         alt={post.title}
                         className="rounded-xl"
@@ -77,16 +108,18 @@ export default function Post() {
                     )}
                 </div>
                 <div className="w-full mb-6">
-                    <Button
-                        onClick={() => {
-                            navigate('/login', { state: { from: location } });
-                        }}
-                    >
-                        Login to Read More
-                    </Button>
                     <h1 className="text-2xl font-bold">{post.title}</h1>
+                    {!authStatus && (
+                        <Button onClick={loginToRead}>
+                            Login to Read More
+                        </Button>
+                    )}
                 </div>
-                <div className="browser-css">{parse(post.content)}</div>
+                {authStatus && userData && fullContent && (
+                    <div className="browser-css">
+                        {parse(fullContent?.content || '')}
+                    </div>
+                )}
             </Container>
         </div>
     ) : null;
