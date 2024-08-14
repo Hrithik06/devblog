@@ -11,7 +11,6 @@ const PostCard = ({ $id, title, featuredImage, $updatedAt, author }) => {
                         src={fileService.getFilePreview(featuredImage, {
                             width: 384,
                             height: 240,
-                            gravity: 'ImageGravity.Center',
                             quality: 60,
                         })}
                         alt={title}

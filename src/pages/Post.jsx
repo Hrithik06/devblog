@@ -18,8 +18,6 @@ export default function Post() {
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
-        // console.log('hello', userData);
-
         if (slug) {
             appwritePostService.getPost(slug).then((post) => {
                 if (post) setPost(post);
@@ -31,21 +29,9 @@ export default function Post() {
     }, [slug, navigate]);
 
     const fetchFullContent = async () => {
-        console.log('fetchFullContent');
-
         const mainContent = await appwritePostService.getFullContent(slug);
-        // console.log(mainContent);
 
         setFullContent(mainContent);
-
-        // Create a new DOM parser
-        const parser = new DOMParser();
-        // Parse the string into a DOM Document
-        const doc = parser.parseFromString(mainContent, 'text/html');
-
-        // Select the second <div> element (first child of the first div)
-        const secondDivContent = doc.querySelectorAll('div > div')[1].innerHTML;
-        console.log(secondDivContent);
     };
     const deletePost = () => {
         appwritePostService.deletePost(post.$id).then((status) => {

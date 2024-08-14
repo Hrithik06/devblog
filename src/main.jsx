@@ -14,7 +14,7 @@ import EditPost from './pages/EditPost';
 import Login from './pages/Login';
 import Post from './pages/Post';
 import AllPosts from './pages/AllPosts';
-
+import Demo from './components/Demo.jsx';
 const router = createBrowserRouter([
     {
         path: '/',
@@ -67,6 +67,10 @@ const router = createBrowserRouter([
             {
                 path: '/post/:slug',
                 element: <Post />,
+            },
+            {
+                path: '/demo',
+                element: <Demo />,
             },
         ],
     },
