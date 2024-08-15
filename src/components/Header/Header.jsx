@@ -37,7 +37,7 @@ const Header = () => {
     ];
 
     return (
-        <header className="py-3 shadow bg-gray-500">
+        <header className="py-3 shadow ">
             <Container>
                 <nav className="flex">
                     <div className="mr-4 ">
@@ -58,14 +58,16 @@ const Header = () => {
                                 </li>
                             ) : null,
                         )}
-                        {authStatus && (
+                        {authStatus && userData && (
                             <li>
                                 <LogoutBtn />
                             </li>
                         )}
-                        {authStatus && (
+                        {authStatus && userData && (
                             <li>
-                                <Button children={userData?.name} />
+                                <Button
+                                    children={userData?.name.split(' ')[0]}
+                                />
                             </li>
                         )}
                     </ul>

@@ -91,7 +91,7 @@ export default function Post() {
                     )}
                 </div>
                 {authStatus && userData && fullContent && (
-                    <article className="browser-css dynamic-container space-y-6">
+                    <article className="browser-css dynamic-container space-y-6 text-justify">
                         {parse(fullContent?.content || '')}
                     </article>
                 )}
