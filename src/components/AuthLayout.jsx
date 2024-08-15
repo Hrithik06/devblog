@@ -11,21 +11,11 @@ export default function AuthLayout({ children, authentication = true }) {
         if (authentication && authStatus !== authentication) {
             navigate('/login');
         } else if (!authentication && authStatus !== authentication) {
-            const redirectTo = location.state?.from || '/';
-            // console.log(redirectTo);
-            // navigate('/');
+            const redirectTo = location.state?.from.pathname || '/';
+
             navigate(redirectTo);
         }
 
-        // if (authentication && authStatus !== authentication) {
-        //     if (location.pathname !== '/login') {
-        //         navigate('/login', { state: { from: location.pathname } });
-        //     }
-        // } else if (!authentication && authStatus !== authentication) {
-        //     if (location.pathname === '/login') {
-        //         navigate('/');
-        //     }
-        // }
         setLoader(false);
     }, [authStatus, authentication, navigate]);
     return loader ? <h1>Loading...</h1> : <>{children}</>;

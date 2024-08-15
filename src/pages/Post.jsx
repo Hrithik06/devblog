@@ -5,6 +5,7 @@ import appwriteFileService from '../appwrite/file';
 import { Button, Container } from '../components';
 import parse from 'html-react-parser';
 import { useSelector } from 'react-redux';
+import { formatDate } from '../conf/helper';
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -17,11 +18,13 @@ export default function Post() {
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
+    const postId = slug.split('-').pop();
     useEffect(() => {
         if (slug) {
-            appwritePostService.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate('/');
+            appwritePostService.getPost(postId).then((post) => {
+                if (post) {
+                    setPost(post);
+                } else navigate('/');
             });
         } else navigate('/');
 
@@ -29,7 +32,7 @@ export default function Post() {
     }, [slug, navigate]);
 
     const fetchFullContent = async () => {
-        const mainContent = await appwritePostService.getFullContent(slug);
+        const mainContent = await appwritePostService.getFullContent(postId);
 
         setFullContent(mainContent);
     };
@@ -46,43 +49,24 @@ export default function Post() {
         navigate('/login', {
             state: { from: location },
         });
-        // console.log(slug);
     };
-
-    // if (!userData) {
-    //     // console.log('HELLo');
-
-    //     return (
-    //         <div>
-    //             <div className="w-full mb-6">
-    //                 <h1 className="text-2xl font-bold">{post.title}</h1>
-    //             </div>
-    //             <img
-    //                 src={appwriteFileService.getFilePreview(post.featuredImage)}
-    //                 alt={post.title}
-    //                 className="rounded-xl"
-    //             />
-    //             Please Login
-    //         </div>
-    //     );
-    // }
 
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className="w-full flex justify-center mb-4 relative ">
                     <img
                         src={appwriteFileService.getFilePreview(
                             post.featuredImage,
                             { quality: 80 },
                         )}
                         alt={post.title}
-                        className="rounded-xl"
+                        className=""
                     />
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
+                            <Link to={`/edit-post/${slug}`}>
                                 <Button bgColor="bg-green-500" className="mr-3">
                                     Edit
                                 </Button>
@@ -93,8 +77,13 @@ export default function Post() {
                         </div>
                     )}
                 </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
+                <div className="w-full mb-6 space-y-2">
+                    <h1 className="text-4xl font-bold">{post.title}</h1>
+                    <div className="flex items-center gap-2 text-gray-500">
+                        {post?.author}
+                        <p className="w-1 h-1 rounded-full bg-gray-500"></p>
+                        {formatDate(post?.$createdAt)}
+                    </div>
                     {!authStatus && (
                         <Button onClick={loginToRead}>
                             Login to Read More
@@ -102,9 +91,9 @@ export default function Post() {
                     )}
                 </div>
                 {authStatus && userData && fullContent && (
-                    <div className="browser-css">
+                    <article className="browser-css dynamic-container space-y-6">
                         {parse(fullContent?.content || '')}
-                    </div>
+                    </article>
                 )}
             </Container>
         </div>

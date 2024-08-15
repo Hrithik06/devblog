@@ -6,13 +6,21 @@ const EditPost = () => {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
+    const postId = slug.split('-').pop();
+
+    const getPostData = async (id) => {
+        const postData = await appwritePostService.getPost(id);
+
+        if (postData) {
+            const fullContent = await appwritePostService.getFullContent(id);
+            if (fullContent) {
+                setPost({ ...postData, content: fullContent.content });
+            }
+        }
+    };
     useEffect(() => {
         if (slug) {
-            appwritePostService.getPost(slug).then((post) => {
-                if (post) {
-                    setPost(post);
-                }
-            });
+            getPostData(postId);
         } else {
             navigate('/');
         }

@@ -22,40 +22,39 @@ const PostForm = ({ post }) => {
     //data comes from react-hook-fom when submitted
     const submitPost = async (data) => {
         //if there is already existing post then it should be updated, use appWrite file and post Service
-        console.log(data.content, typeof data.content);
 
-        // if (post) {
-        //     // upload the new updated file
-        //     const dbNewFile = data?.image[0]
-        //         ? await appwriteFileService.uploadFile(data.image[0])
-        //         : null;
-        //     // delete the old linked file
-        //     if (dbNewFile) {
-        //         await appwriteFileService.deleteFile(post?.featuredImage);
-        //     }
-        //     const dbEditPost = await appwritePostService.updatePost(post?.$id, {
-        //         ...data,
-        //         featuredImage: dbNewFile ? dbNewFile.$id : undefined,
-        //     });
-        //     if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
-        // } else {
-        //     //else create a new post
+        if (post) {
+            // upload the new updated file
+            const dbNewFile = data?.image[0]
+                ? await appwriteFileService.uploadFile(data.image[0])
+                : null;
+            // delete the old linked file
+            if (dbNewFile) {
+                await appwriteFileService.deleteFile(post?.featuredImage);
+            }
+            const dbEditPost = await appwritePostService.updatePost(post?.$id, {
+                ...data,
+                featuredImage: dbNewFile ? dbNewFile.$id : undefined,
+            });
+            if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
+        } else {
+            console.log('CREATE');
 
-        //     //store file returned by appwriteFileService
-        //     const dbNewFile = await appwriteFileService.uploadFile(
-        //         data.image[0],
-        //     );
-
-        //     if (dbNewFile) {
-        //         const dbNewPost = await appwritePostService.createPost({
-        //             ...data,
-        //             featuredImage: dbNewFile.$id,
-        //             userId: userData.$id,
-        //             author: userData.name,
-        //         });
-        //         if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
-        //     }
-        // }
+            //else create a new post
+            //store file returned by appwriteFileService
+            const dbNewFile = await appwriteFileService.uploadFile(
+                data.image[0],
+            );
+            if (dbNewFile) {
+                const dbNewPost = await appwritePostService.createPost({
+                    ...data,
+                    featuredImage: dbNewFile.$id,
+                    userId: userData.$id,
+                    author: userData.name,
+                });
+                if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
+            }
+        }
     };
 
     const slugTransform = useCallback((value) => {
@@ -88,13 +87,13 @@ const PostForm = ({ post }) => {
         <form onSubmit={handleSubmit(submitPost)} className="flex flex-wrap">
             <div className="w-2/3 px-2">
                 <Input
-                    label="Title :"
+                    // label="Title :"
                     placeholder="Title"
-                    className="mb-4 p-2 rounded-lg"
+                    className="mb-4 p-2 rounded-lg text-3xl"
                     {...register('title', { required: true })}
                 />
                 <Input
-                    label="Slug :"
+                    // label="Slug :"
                     placeholder="Slug"
                     className="mb-4 p-2 rounded-lg"
                     {...register('slug', { required: true })}
@@ -105,7 +104,7 @@ const PostForm = ({ post }) => {
                     }}
                 />
                 <RTE
-                    label="Content :"
+                    // label="Content :"
                     name="content"
                     control={control}
                     defaultValue={getValues('content')}
@@ -117,6 +116,7 @@ const PostForm = ({ post }) => {
                     type="file"
                     className="my-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
+                    placeholder="jesus"
                     {...register('image', { required: !post })}
                 />
                 {post && (
@@ -144,10 +144,10 @@ const PostForm = ({ post }) => {
                 />
                 <Button
                     type="submit"
-                    bgColor={post ? 'bg-green-500' : undefined}
-                    className="w-full"
+                    bgColor={post ? undefined : 'bg-green-500'}
+                    className="w-full text-white"
                 >
-                    {post ? 'Update' : 'Submit'}
+                    {post ? 'Update' : 'Publish'}
                 </Button>
             </div>
         </form>

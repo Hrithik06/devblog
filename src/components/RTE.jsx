@@ -16,6 +16,17 @@ const RTE = ({ name, control, label, defaultValue = '' }) => {
                             branding: false,
                             // skin: 'oxide-dark',
                             // content_css: 'dark',
+                            skin: window.matchMedia(
+                                '(prefers-color-scheme: dark)',
+                            ).matches
+                                ? 'oxide-dark'
+                                : 'oxide',
+                            content_css: window.matchMedia(
+                                '(prefers-color-scheme: dark)',
+                            ).matches
+                                ? 'dark'
+                                : 'default',
+                            placeholder: 'Tell your story here...',
                             initialValue: defaultValue,
                             height: 500,
                             menubar: true,

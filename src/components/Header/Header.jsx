@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo, Container, LogoutBtn, Button } from '../index';
 import { useSelector } from 'react-redux';
@@ -35,9 +35,7 @@ const Header = () => {
             active: authStatus,
         },
     ];
-    // useEffect(() => {
-    //     if (userData) console.log(userData);
-    // }, [userData, navigate, authStatus]);
+
     return (
         <header className="py-3 shadow bg-gray-500">
             <Container>

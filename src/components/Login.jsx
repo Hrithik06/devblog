@@ -22,10 +22,9 @@ function Login() {
                 const user = await appwriteAuthService.getCurrentUser();
 
                 if (user) {
-                    console.log(user);
-
                     dispatch(authLogin(user));
                     const redirectTo = location.state?.from || '/';
+
                     navigate(redirectTo, { replace: true });
                     navigate('/');
                 }

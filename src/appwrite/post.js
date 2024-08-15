@@ -1,5 +1,5 @@
 import conf from '../conf/conf';
-import { Client, Databases, Query } from 'appwrite';
+import { Client, Databases, Query, ID } from 'appwrite';
 
 class PostService {
     client = new Client();
@@ -23,31 +23,33 @@ class PostService {
         userId,
         author,
     }) {
-        console.log(content.substring(0, 100));
-
+        const id = ID.unique();
         try {
             const newPost = await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,
-                { title, content, featuredImage, status, userId, author },
+                id,
+                { title, featuredImage, status, userId, author, slug },
             );
+            console.log(newPost);
             if (newPost) {
-                await this.createFullContent(slug, content);
+                console.log(id);
+
+                await this.createFullContent(id, content);
             }
 
-            return newPost;
+            // return newPost;
         } catch (error) {
             console.log('Appwrite service :: createPost error ::  ', error);
         }
     }
 
-    async createFullContent(slug, content) {
+    async createFullContent(id, content) {
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionFullContentId,
-                slug,
+                id,
                 { content },
             );
         } catch (error) {
@@ -66,7 +68,7 @@ class PostService {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug,
-                { title, content, featuredImage, status },
+                { title, featuredImage, status },
             );
             if (editPost) {
                 await this.updateFullContent(slug, content);
@@ -140,8 +142,6 @@ class PostService {
         }
     }
     async getFullContent(slug) {
-        console.log(slug);
-
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,

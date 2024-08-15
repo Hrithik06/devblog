@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dynamic-container ul {
+    @apply list-disc list-inside;
+    /* Apply Tailwind utilities */
+}
+
+.dynamic-container ul>li {
+    @apply pl-5;
+    /* Apply Tailwind utilities */
+}
+
+.dynamic-container h1 {
+    @apply font-bold text-[2em];
+}
+
+.dynamic-container h2 {
+    @apply font-bold text-[1.5em];
+}
+
+.dynamic-container h3 {
+    @apply font-bold text-[1.17em];
+}
+
+.dynamic-container h4 {
+    @apply font-bold text-[1em];
+}
+
+.dynamic-container h5 {
+    @apply font-bold text-[.83em];
+}
+
+.dynamic-container h6 {
+    @apply font-bold text-[.67em];
+}
