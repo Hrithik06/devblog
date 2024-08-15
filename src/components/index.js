@@ -16,7 +16,7 @@ import PostCard from './PostCard';
 import PostCardWrapper from './PostCardWrapper';
 import RTE from './RTE';
 import Select from './Select';
-import Signup from './Signup';
+// import Signup from './Signup';
 import ErrorPage from './ErrorPage';
 export {
     Footer,
@@ -32,7 +32,7 @@ export {
     PostCard,
     RTE,
     Select,
-    Signup,
+    // Signup,
     PostCardWrapper,
     ErrorPage,
 };
