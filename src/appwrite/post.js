@@ -1,5 +1,6 @@
 import conf from '../conf/conf';
 import { Client, Databases, Query, ID } from 'appwrite';
+import { timeToRead } from '../conf/helper';
 
 class PostService {
     client = new Client();
@@ -11,7 +12,6 @@ class PostService {
             .setProject(conf.appwriteProjectId);
 
         this.databases = new Databases(this.client);
-        // console.log(this.databases);
     }
     //slug is unique id
     async createPost({
@@ -29,16 +29,19 @@ class PostService {
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 id,
-                { title, featuredImage, status, userId, author, slug },
+                {
+                    title,
+                    featuredImage,
+                    status,
+                    userId,
+                    author,
+                    slug,
+                    timeToRead: timeToRead(content),
+                },
             );
-            console.log(newPost);
             if (newPost) {
-                console.log(id);
-
                 await this.createFullContent(id, content);
             }
-
-            // return newPost;
         } catch (error) {
             console.log('Appwrite service :: createPost error ::  ', error);
         }
@@ -62,16 +65,22 @@ class PostService {
 
     //sending slug seperately cuz DOCUMENT_ID for which are updating has to be sent
     //not updating userId cuz not needed
-    async updatePost(slug, { title, content, featuredImage, status }) {
+    async updatePost(id, { title, content, featuredImage, status, slug }) {
         try {
             const editPost = await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,
-                { title, featuredImage, status },
+                id,
+                {
+                    title,
+                    featuredImage,
+                    status,
+                    slug,
+                    timeToRead: timeToRead(content),
+                },
             );
             if (editPost) {
-                await this.updateFullContent(slug, content);
+                await this.updateFullContent(id, content);
             }
             return editPost;
         } catch (error) {
@@ -79,12 +88,12 @@ class PostService {
         }
     }
 
-    async updateFullContent(slug, content) {
+    async updateFullContent(id, content) {
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionFullContentId,
-                slug,
+                id,
                 { content },
             );
         } catch (error) {
@@ -96,15 +105,15 @@ class PostService {
     }
 
     //here we wont return the response but true or false its upto frontend how it will handle, there's nothing wrong in returning the response
-    async deletePost(slug) {
+    async deletePost(id) {
         try {
             const del = await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,
+                id,
             );
             if (del) {
-                await this.deleteFullContent(slug);
+                await this.deleteFullContent(id);
             }
 
             return true;
@@ -114,12 +123,12 @@ class PostService {
         }
     }
 
-    async deleteFullContent(slug) {
+    async deleteFullContent(id) {
         try {
             return await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionFullContentId,
-                slug,
+                id,
             );
         } catch (error) {
             console.log(
@@ -129,24 +138,24 @@ class PostService {
         }
     }
 
-    async getPost(slug) {
+    async getPost(id) {
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,
+                id,
             );
         } catch (error) {
             console.log('Appwrite service :: getPost error ::  ', error);
             return null;
         }
     }
-    async getFullContent(slug) {
+    async getFullContent(id) {
         try {
             return await this.databases.getDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionFullContentId,
-                slug,
+                id,
             );
         } catch (error) {
             console.log('Appwrite service :: getFullContent error ::  ', error);
@@ -155,8 +164,6 @@ class PostService {
     }
     // we want all values whose status is active, else listDocuments gives all the docs
     async getAllPost(queries = [Query.equal('status', 'active')]) {
-        // console.log(queries);
-
         try {
             const dbResponse = await this.databases.listDocuments(
                 conf.appwriteDatabaseId,

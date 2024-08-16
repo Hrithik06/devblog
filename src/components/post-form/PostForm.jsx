@@ -21,8 +21,7 @@ const PostForm = ({ post }) => {
 
     //data comes from react-hook-fom when submitted
     const submitPost = async (data) => {
-        //if there is already existing post then it should be updated, use appWrite file and post Service
-
+        // if there is already existing post then it should be updated, use appWrite file and post Service
         if (post) {
             // upload the new updated file
             const dbNewFile = data?.image[0]
@@ -38,8 +37,6 @@ const PostForm = ({ post }) => {
             });
             if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
         } else {
-            console.log('CREATE');
-
             //else create a new post
             //store file returned by appwriteFileService
             const dbNewFile = await appwriteFileService.uploadFile(

@@ -15,7 +15,7 @@ function Footer() {
                             <div>
                                 <p className="text-sm text-gray-600">
                                     &copy; Copyright 2024. All Rights Reserved
-                                    by DEVBLOG.
+                                    by <strong>theblog</strong>.
                                 </p>
                             </div>
                         </div>

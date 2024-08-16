@@ -53,7 +53,7 @@ export default function Post() {
 
     return post ? (
         <div className="py-8">
-            <Container>
+            <Container className="max-w-3xl">
                 <div className="w-full flex justify-center mb-4 relative ">
                     <img
                         src={appwriteFileService.getFilePreview(
@@ -61,7 +61,6 @@ export default function Post() {
                             { quality: 80 },
                         )}
                         alt={post.title}
-                        className=""
                     />
 
                     {isAuthor && (
@@ -81,8 +80,10 @@ export default function Post() {
                     <h1 className="text-4xl font-bold">{post.title}</h1>
                     <div className="flex items-center gap-2 text-gray-500">
                         {post?.author}
-                        <p className="w-1 h-1 rounded-full bg-gray-500"></p>
+                        <span className="w-1 h-1 rounded-full bg-gray-500"></span>
                         {formatDate(post?.$createdAt)}
+                        <span className="w-1 h-1 rounded-full bg-gray-500"></span>
+                        {post?.timeToRead}
                     </div>
                     {!authStatus && (
                         <Button onClick={loginToRead}>

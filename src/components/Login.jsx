@@ -41,7 +41,6 @@ function Login() {
             >
                 {/* <div className="text-right">
                     <Button
-                        className=""
                         onClick={() => navigate(location.state?.from?.pathname)}
                     >
                         X

@@ -14,6 +14,7 @@ const RTE = ({ name, control, label, defaultValue = '' }) => {
                         initialValue={defaultValue}
                         init={{
                             branding: false,
+                            selector: '#myTextarea',
                             // skin: 'oxide-dark',
                             // content_css: 'dark',
                             skin: window.matchMedia(

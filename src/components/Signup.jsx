@@ -52,47 +52,48 @@ const Signup = () => {
                 {errorMsg && (
                     <p className="text-red-600 mt-8 text-center">{errorMsg}</p>
                 )}
-                <form onSubmit={handleSubmit(handleSignUp)} className="mt-8">
-                    <div className="mt-8">
-                        <Input
-                            label="Name"
-                            type="text"
-                            placeholder="John Doe"
-                            className="p-2 rounded-lg"
-                            {...register('name', {
-                                required: true,
-                            })}
-                        />
-                        <Input
-                            label="Email"
-                            type="email"
-                            placeholder="johndoe@abc.com"
-                            className="p-2 rounded-lg"
-                            {...register('email', {
-                                required: true,
-                                validate: {
-                                    //matchPattern is a custom arrow function
-                                    matchPattern: (value) =>
-                                        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
-                                            value,
-                                        ) ||
-                                        'Email address must be a valid address',
-                                },
-                            })}
-                        />
-                        <Input
-                            label="Password"
-                            type="password"
-                            placeholder="Enter Password"
-                            className="p-2 rounded-lg"
-                            {...register('password', {
-                                required: true,
-                            })}
-                        />
-                        <Button className="w-full" type="submit">
-                            Sign Up
-                        </Button>
-                    </div>
+                <form
+                    onSubmit={handleSubmit(handleSignUp)}
+                    className="mt-8 space-y-4"
+                >
+                    <Input
+                        label="Name"
+                        type="text"
+                        placeholder="John Doe"
+                        className="p-2 rounded-lg"
+                        {...register('name', {
+                            required: true,
+                        })}
+                    />
+                    <Input
+                        label="Email"
+                        type="email"
+                        placeholder="johndoe@abc.com"
+                        className="p-2 rounded-lg"
+                        {...register('email', {
+                            required: true,
+                            validate: {
+                                //matchPattern is a custom arrow function
+                                matchPattern: (value) =>
+                                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(
+                                        value,
+                                    ) ||
+                                    'Email address must be a valid address',
+                            },
+                        })}
+                    />
+                    <Input
+                        label="Password"
+                        type="password"
+                        placeholder="Enter Password"
+                        className="p-2 rounded-lg"
+                        {...register('password', {
+                            required: true,
+                        })}
+                    />
+                    <Button className="w-full" type="submit">
+                        Sign Up
+                    </Button>
                 </form>
             </div>
         </div>

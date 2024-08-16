@@ -8,6 +8,7 @@ import Container from './container/Container';
 import PostForm from './post-form/PostForm';
 
 import AuthLayout from './AuthLayout';
+import Avatar from './Avatar';
 import Button from './Button';
 import Input from './Input';
 import Login from './Login';
@@ -18,6 +19,7 @@ import RTE from './RTE';
 import Select from './Select';
 import Signup from './Signup';
 import ErrorPage from './ErrorPage';
+import Hero from './Hero';
 export {
     Footer,
     Header,
@@ -25,6 +27,7 @@ export {
     Container,
     PostForm,
     AuthLayout,
+    Avatar,
     Button,
     Input,
     Login,
@@ -35,4 +38,5 @@ export {
     Signup,
     PostCardWrapper,
     ErrorPage,
+    Hero,
 };
