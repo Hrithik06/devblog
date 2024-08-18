@@ -7,6 +7,7 @@ const EditPost = () => {
     const { slug } = useParams();
     const navigate = useNavigate();
     const postId = slug.split('-').pop();
+    console.log('edit-post', slug);
 
     const getPostData = async (id) => {
         const postData = await appwritePostService.getPost(id);

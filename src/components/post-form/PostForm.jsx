@@ -35,7 +35,8 @@ const PostForm = ({ post }) => {
                 ...data,
                 featuredImage: dbNewFile ? dbNewFile.$id : undefined,
             });
-            if (dbEditPost) navigate(`/post/${dbEditPost.$id}`);
+            if (dbEditPost)
+                navigate(`/post/${dbEditPost.slug}-${dbEditPost.$id}`);
         } else {
             //else create a new post
             //store file returned by appwriteFileService
@@ -49,7 +50,8 @@ const PostForm = ({ post }) => {
                     userId: userData.$id,
                     author: userData.name,
                 });
-                if (dbNewPost) navigate(`/post/${dbNewPost.$id}`);
+                if (dbNewPost)
+                    navigate(`/post/${dbNewPost.slug}-${dbNewPost.$id}`);
             }
         }
     };

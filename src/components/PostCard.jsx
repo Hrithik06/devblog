@@ -2,6 +2,7 @@ import React from 'react';
 import fileService from '../appwrite/file';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../conf/helper';
+import { ImageLoader } from './index';
 const PostCard = ({
     $id,
     title,
@@ -15,14 +16,11 @@ const PostCard = ({
         <Link to={`/post/${slug}-${$id}`}>
             <div className="w-full hover:bg-[#f2f0ef] duration-500 space-y-2 pb-2 border border-black rounded-3xl 2xl:h-[496px] relative">
                 <div className="w-full justify-center mb-4 rounded-t-3xl border-dashed border-b border-black">
-                    <img
-                        src={fileService.getFilePreview(featuredImage, {
-                            // width: 670,
-                            // height: 340,
-                            // quality: 70,
-                        })}
+                    <ImageLoader
                         alt={title}
-                        className="w-full rounded-t-3xl 2xl:h-80"
+                        className="w-full rounded-t-3xl 2xl:h-80 "
+                        quality={20}
+                        id={featuredImage}
                     />
                 </div>
 
@@ -35,7 +33,7 @@ const PostCard = ({
                     <h2 className="font-semibold text-wrap text-2xl text-black">
                         {title}
                     </h2>
-                    <p className="text-lg text-gray-700 absolute bottom-3">
+                    <p className="text-lg text-gray-700 absolute 2xl:bottom-3">
                         {author}
                     </p>
                 </div>

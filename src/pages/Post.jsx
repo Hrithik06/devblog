@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 import appwritePostService from '../appwrite/post';
 import appwriteFileService from '../appwrite/file';
-import { Button, Container } from '../components';
+import { Button, Container, ImageLoader, Loader } from '../components';
 import parse from 'html-react-parser';
 import { useSelector } from 'react-redux';
 import { formatDate } from '../conf/helper';
@@ -33,7 +33,6 @@ export default function Post() {
 
     const fetchFullContent = async () => {
         const mainContent = await appwritePostService.getFullContent(postId);
-
         setFullContent(mainContent);
     };
     const deletePost = () => {
@@ -52,21 +51,35 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
-            <Container className="max-w-3xl">
-                <div className="w-full flex justify-center mb-4 relative ">
-                    <img
-                        src={appwriteFileService.getFilePreview(
-                            post.featuredImage,
-                            { quality: 80 },
-                        )}
-                        alt={post.title}
-                    />
-
+        <div className="py-8 border-2">
+            <div className="w-full ">
+                <div className="w-full px-80 flex flex-col justify-center mb-4  bg-gradient-to-b from-[#f4f4f4] to-[#d6d6d6] border-b-[3px] border-black">
+                    <div className="">
+                        <div className="w-3/4 space-y-4 ml-12 mb-4 ">
+                            <div className="flex items-center gap-2 text-gray-500 text-xl">
+                                {formatDate(post?.$createdAt)}
+                                <span className="w-1 h-1 rounded-full bg-gray-500"></span>
+                                {post?.timeToRead}
+                            </div>
+                            <h1 className="xl:text-7xl font-bold text-shadow-gray-300 text-shadow-sm">
+                                {post.title}
+                            </h1>
+                            <p>//TODO: #TAG</p>
+                            <p className="text-gray-700 text-xl">
+                                {post?.author}
+                            </p>
+                        </div>
+                        <ImageLoader
+                            alt={post.title}
+                            quality={60}
+                            id={post.featuredImage}
+                            className={'rounded-[32px] border-black border-2 '}
+                        />
+                    </div>
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${slug}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
+                                <Button bgColor="bg-blue-500" className="mr-3">
                                     Edit
                                 </Button>
                             </Link>
@@ -77,18 +90,12 @@ export default function Post() {
                     )}
                 </div>
                 <div className="w-full mb-6 space-y-2">
-                    <h1 className="text-4xl font-bold">{post.title}</h1>
-                    <div className="flex items-center gap-2 text-gray-500">
-                        {post?.author}
-                        <span className="w-1 h-1 rounded-full bg-gray-500"></span>
-                        {formatDate(post?.$createdAt)}
-                        <span className="w-1 h-1 rounded-full bg-gray-500"></span>
-                        {post?.timeToRead}
-                    </div>
                     {!authStatus && (
-                        <Button onClick={loginToRead}>
-                            Login to Read More
-                        </Button>
+                        <div className="text-center">
+                            <Button onClick={loginToRead}>
+                                Login to Read More
+                            </Button>
+                        </div>
                     )}
                 </div>
                 {authStatus && userData && fullContent && (
@@ -96,7 +103,11 @@ export default function Post() {
                         {parse(fullContent?.content || '')}
                     </article>
                 )}
-            </Container>
+            </div>
         </div>
-    ) : null;
+    ) : (
+        <Loader />
+    );
+
+    // <div className="">Loading Article</div>
 }

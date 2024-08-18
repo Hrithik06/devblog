@@ -15,7 +15,11 @@ const Hero = () => {
                 <p>Uncovering the World, One Post at a Time.</p>
             </div>
             <div className="w-[500px]">
-                <img src={broAnimatedLight} alt="" className="w-full" />
+                <img
+                    src={broAnimatedLight}
+                    alt=""
+                    className="w-full hover:scale-110 duration-500"
+                />
                 {/* <img src={broAnimatedDark} alt="" /> */}
             </div>
         </div>

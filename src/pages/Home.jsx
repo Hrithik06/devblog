@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Container, PostCard } from '../components';
+import React, { useEffect, Suspense } from 'react';
+import { Container, PostCard, ShimmerPostCard } from '../components';
 import appwritePostService from '../appwrite/post';
 import { useDispatch, useSelector } from 'react-redux';
 import { addHomeBlogs } from '../store/homeSlice';
@@ -18,33 +18,35 @@ function Home() {
             });
     }, []);
 
-    if (!homeBlogs) {
-        return (
-            <div className="w-full py-8 mt-4 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold hover:text-gray-500">
-                                TODO:Shimmer
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
-        );
-    }
+    // if (!homeBlogs) {
+    //     return (
+    //         <div className="flex items-center justify-center h-screen">
+    //             <div className="relative">
+    //                 <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
+    //                 <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
+    //             </div>
+    //         </div>
+    //     );
+    // }
+
     return (
         <div className="w-full pb-8">
             <Container>
-                {homeBlogs && <Hero />}
-                {/* <div className="flex flex-wrap justify-start"> */}
-                <div className="grid grid-cols-2">
-                    {homeBlogs?.map((post) => (
-                        <div key={post.$id} className="p-2 ">
-                            <PostCard {...post} />
-                        </div>
-                    ))}
-                </div>
+                <Hero />
+                {homeBlogs ? (
+                    <div className="grid grid-cols-2">
+                        {homeBlogs?.map((post) => (
+                            <div key={post.$id} className="p-2 ">
+                                <PostCard {...post} />
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-2 space-x-4">
+                        <ShimmerPostCard />
+                        <ShimmerPostCard />
+                    </div>
+                )}
             </Container>
         </div>
     );
