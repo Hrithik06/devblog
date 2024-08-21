@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { PostCard, Container } from '../components/index';
 import appwritePostService from '../appwrite/post';
-const AllPosts = () => {
+import { useSelector } from 'react-redux';
+const MyPosts = () => {
+    const userData = useSelector((store) => store.auth.userData);
     const [posts, setPosts] = useState([]);
     useEffect(() => {
-        appwritePostService.getAllPost().then((posts) => {
+        appwritePostService.getMyPost(userData.$id).then((posts) => {
             if (posts) {
                 setPosts(posts.documents);
             }
@@ -14,9 +16,9 @@ const AllPosts = () => {
     return (
         <div className="w-full py-8">
             <Container>
-                <div className="flex flex-wrap">
+                <div className="grid grid-cols-2">
                     {posts.map((post) => (
-                        <div key={post.$id} className="p-2 w-1/4 2xl:w-96">
+                        <div key={post.$id} className="p-2 ">
                             <PostCard {...post} />
                         </div>
                     ))}
@@ -26,4 +28,4 @@ const AllPosts = () => {
     );
 };
 
-export default AllPosts;
+export default MyPosts;

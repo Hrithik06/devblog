@@ -1,5 +1,5 @@
-import React, { useEffect, useCallback } from 'react';
-import { Button, RTE, Input, Select } from '../index';
+import React, { useEffect, useCallback, useState } from 'react';
+import { Button, RTE, Input, Select, CoverImageUpload } from '../index';
 import appwritePostService from '../../appwrite/post';
 import appwriteFileService from '../../appwrite/file';
 import { useNavigate } from 'react-router-dom';
@@ -113,11 +113,12 @@ const PostForm = ({ post }) => {
                 <Input
                     label="Featured Image :(PNG, JPG, JPEG, GIF)"
                     type="file"
-                    className="my-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700 hover:file:bg-violet-100"
+                    className="my-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-blue-700 hover:file:bg-blue-100"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
-                    placeholder="jesus"
+                    placeholder="cover-image"
                     {...register('image', { required: !post })}
                 />
+
                 {post && (
                     <div className="w-full mb-4">
                         <img
@@ -135,6 +136,7 @@ const PostForm = ({ post }) => {
                         />
                     </div>
                 )}
+
                 <Select
                     options={['active', 'inactive']}
                     label="Status"

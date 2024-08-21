@@ -6,6 +6,7 @@ import LogoutBtn from './Header/LogoutBtn';
 import Container from './container/Container';
 
 import PostForm from './post-form/PostForm';
+import CoverImageUpload from './post-form/CoverImageUpload';
 
 import AuthLayout from './AuthLayout';
 import Avatar from './Avatar';
@@ -46,4 +47,5 @@ export {
     ShimmerPostCard,
     Loader,
     ImageLoader,
+    CoverImageUpload,
 };

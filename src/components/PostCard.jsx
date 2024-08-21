@@ -19,8 +19,10 @@ const PostCard = ({
                     <ImageLoader
                         alt={title}
                         className="w-full rounded-t-3xl 2xl:h-80 "
-                        quality={20}
+                        quality={30}
                         id={featuredImage}
+                        width={478}
+                        height={320}
                     />
                 </div>
 
@@ -30,7 +32,7 @@ const PostCard = ({
                         <span className="w-1 h-1 rounded-full bg-gray-500"></span>
                         {timeToRead}
                     </div>
-                    <h2 className="font-semibold text-wrap text-2xl text-black">
+                    <h2 className="font-semibold text-wrap text-2xl text-black truncate">
                         {title}
                     </h2>
                     <p className="text-lg text-gray-700 absolute 2xl:bottom-3">

@@ -180,6 +180,24 @@ class PostService {
             return false;
         }
     }
+    async getMyPost(id) {
+        const queries = [Query.equal('userId', id)];
+        try {
+            const dbResponse = await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
+                queries,
+            );
+
+            return dbResponse;
+        } catch (error) {
+            console.log(
+                'Appwrite service :: getAllPost error :: ',
+                error.message,
+            );
+            return false;
+        }
+    }
 }
 
 const appwritePostService = new PostService();
