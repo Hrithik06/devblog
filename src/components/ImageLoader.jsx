@@ -25,7 +25,7 @@ const ImageLoader = ({ quality, alt, className, id, width, height }) => {
         );
     }, [id]);
     return (
-        <div className="">
+        <div className="w-full">
             {!isLoaded && !hasError && (
                 <div
                     className={`${className} flex items-center justify-center animate-pulse dark:bg-gray-500 bg-gray-300 py-4 w-[${width}px] h-[${height}px]`}

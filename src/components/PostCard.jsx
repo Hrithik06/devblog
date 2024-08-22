@@ -32,7 +32,7 @@ const PostCard = ({
                         <span className="w-1 h-1 rounded-full bg-gray-500"></span>
                         {timeToRead}
                     </div>
-                    <h2 className="font-semibold text-wrap text-2xl text-black truncate">
+                    <h2 className="font-semibold text-2xl line-clamp-2 text-black ">
                         {title}
                     </h2>
                     <p className="text-lg text-gray-700 absolute 2xl:bottom-3">
