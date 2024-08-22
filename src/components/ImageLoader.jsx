@@ -28,9 +28,13 @@ const ImageLoader = ({ quality, alt, className, id, width, height }) => {
         <div className="w-full">
             {!isLoaded && !hasError && (
                 <div
-                    className={`${className} flex items-center justify-center animate-pulse dark:bg-gray-500 bg-gray-300 py-4 w-[${width}px] h-[${height}px]`}
+                    className={`${className} animate-pulse dark:bg-gray-500 bg-gray-300 py-4 2xl:w-[896px] 2xl:h-[502px] xl:w-[720px] xl:h-[400px] flex items-center justify-center`}
                 >
-                    <img src={imageSkeleton} alt="" />
+                    <img
+                        src={imageSkeleton}
+                        alt=""
+                        // className="max-w-full max-h-full "
+                    />
                 </div>
             )}
             {hasError && <p>Failed to load image.</p>}

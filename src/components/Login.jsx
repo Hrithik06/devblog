@@ -18,6 +18,8 @@ function Login() {
         setErrorMsg('');
         try {
             const session = await appwriteAuthService.login(data);
+            console.log(session);
+
             if (session) {
                 const user = await appwriteAuthService.getCurrentUser();
 

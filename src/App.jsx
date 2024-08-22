@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import appwriteAuthService from './appwrite/auth';
 import { login, logout } from './store/authSlice';
-import { Footer, Header, Loader } from './components';
+import { Footer, Header, Loader, ScrollToTop } from './components';
 import { Outlet } from 'react-router-dom';
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
     return !loading ? (
         <div className="min-h-screen flex flex-wrap content-between font-inter bg-[#f3f3f3]">
             <div className="w-full block">
+                <ScrollToTop />
                 <Header />
                 <main className="">
                     <Outlet />

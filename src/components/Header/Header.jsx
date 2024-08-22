@@ -23,7 +23,7 @@ const Header = () => {
             name: 'Create Account',
             slug: '/signup',
             active: !authStatus,
-            className: 'bg-blue-500 rounded-lg',
+            // className: 'hover:underline underline-offset-2 ',
         },
         {
             name: 'My Posts',
@@ -84,7 +84,7 @@ const Header = () => {
                                 <li key={item.name}>
                                     <button
                                         onClick={() => navigate(item.slug)}
-                                        className={`flex items-center gap-1 px-3 py-2 duration-200 hover:bg-blue-100 rounded-full ${item.className}`}
+                                        className={`flex items-center gap-1 px-3 py-2 duration-500 hover:bg-blue-200 rounded-full ${item.className}`}
                                     >
                                         <span>{item?.icon}</span>
 

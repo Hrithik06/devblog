@@ -22,9 +22,11 @@ import Signup from './Signup';
 import ErrorPage from './ErrorPage';
 import Hero from './Hero';
 import ImageLoader from './ImageLoader';
+import ScrollToTop from './ScrollTotop';
 
 import ShimmerPostCard from './Shimmer/ShimmerPostCard';
 import Loader from './Shimmer/Loader';
+
 export {
     Footer,
     Header,
@@ -48,4 +50,5 @@ export {
     Loader,
     ImageLoader,
     CoverImageUpload,
+    ScrollToTop,
 };

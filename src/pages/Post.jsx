@@ -53,8 +53,8 @@ export default function Post() {
     return post ? (
         <div className="w-full py-8 flex flex-col items-center">
             <div className=" w-full  ">
-                <div className="w-full 2xl:mb-56 xl:mb-36 px-80 flex flex-col justify-center items-center bg-gradient-to-b from-[#f4f4f4] to-[#d6d6d6] border-b-[3px] border-black pb-[290px] ">
-                    <div className="2xl:max-w-4xl xl:max-w-2xl space-y-4  mb-4 ">
+                <div className="w-full 2xl:mb-56 xl:mb-36 px-80 flex flex-col justify-center items-center bg-gradient-to-b from-[#f4f4f4] to-[#d6d6d6] border-b-[3px] border-black 2xl:pb-72 xl:pb-52">
+                    <div className="2xl:max-w-4xl xl:max-w-2xl space-y-4  mb-4 xl:ml-12">
                         <div className="flex items-center gap-2 text-gray-500 text-xl">
                             {formatDate(post?.$createdAt)}
                             <span className="w-1 h-1 rounded-full bg-gray-500"></span>
@@ -67,13 +67,13 @@ export default function Post() {
                         <p className="text-gray-700 text-xl">{post?.author}</p>
                     </div>
                     <div className="">
-                        <figure className="absolute left-1/2 transform -translate-x-1/2 max-w-4xl">
+                        <figure className="absolute left-1/2 transform -translate-x-1/2 ">
                             <ImageLoader
                                 alt={post.title}
                                 quality={60}
                                 id={post.featuredImage}
                                 className={
-                                    'rounded-[48px] border-black border-[3px] w-full '
+                                    'rounded-[48px] border-black border-[3px] '
                                 }
                                 width={896}
                                 height={502}
