@@ -1,57 +1,177 @@
+import {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+} from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+
 import React from 'react';
-import image from '../assets/mohammad-rahmani-gA396xahf-Q-unsplash.jpg';
-export default function Post() {
+import { Link } from 'react-router-dom';
+import { Logo, Container, LogoutBtn, Avatar } from '../components/index';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ');
+}
+
+export default function Example() {
+    const authStatus = useSelector((store) => store.auth.status);
+    const userData = useSelector((store) => store.auth.userData);
+    const navigation = [
+        { name: 'Home', href: '/', active: true, current: true },
+        { name: 'Login', href: '/login', active: !authStatus, current: false },
+        {
+            name: 'Create Account',
+            href: '/signup',
+            active: !authStatus,
+            current: false,
+        },
+        {
+            name: 'My Posts',
+            href: '/my-posts',
+            active: authStatus,
+            current: false,
+        },
+        {
+            name: 'Write',
+            href: '/new',
+            active: authStatus,
+            icon: (
+                <svg
+                    width="16px"
+                    height="16px"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                    <g
+                        id="SVGRepo_tracerCarrier"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    ></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z"
+                            stroke="#000000"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        ></path>{' '}
+                        <path
+                            d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13"
+                            stroke="#000000"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        ></path>{' '}
+                    </g>
+                </svg>
+            ),
+            current: false,
+        },
+    ];
     return (
-        <div className="w-full  flex flex-col items-center">
-            <div className="pb-[300px] w-full relative ">
-                <div className="w-full  px-80 flex flex-col justify-center mb-4  bg-gradient-to-b from-[#f4f4f4] to-[#d6d6d6] border-b-[3px] border-black pb-[300px] ">
-                    <div className="w-3/4 space-y-4 ml-12 mb-4 ">
-                        <div className="flex items-center gap-2 text-gray-500 text-xl">
-                            Thursday, August 15, 2024
-                            <span className="w-1 h-1 rounded-full bg-gray-500"></span>
-                            &lt; 1 min read
+        <Disclosure as="nav" className="">
+            <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div className="relative flex h-16 items-center justify-between">
+                    <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        {/* Mobile menu button*/}
+                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                            <span className="absolute -inset-0.5" />
+                            <span className="sr-only">Open main menu</span>
+                            <Bars3Icon
+                                aria-hidden="true"
+                                className="block h-6 w-6 group-data-[open]:hidden"
+                            />
+                            <XMarkIcon
+                                aria-hidden="true"
+                                className="hidden h-6 w-6 group-data-[open]:block"
+                            />
+                        </DisclosureButton>
+                    </div>
+                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                        <Logo />
+                        <div className="hidden sm:ml-6 sm:block">
+                            <div className="flex space-x-4">
+                                {navigation.map(
+                                    (item) =>
+                                        item.active && (
+                                            <a
+                                                key={item.name}
+                                                href={item.href}
+                                                className="flex items-center gap-1"
+                                                // aria-current={
+                                                //     item.current ? 'page' : undefined
+                                                // }
+                                                // className={classNames(
+                                                //     item.current
+                                                //         ? 'bg-gray-900 text-white'
+                                                //         : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                                //     'rounded-md px-3 py-2 text-sm font-medium',
+                                                // )}
+                                            >
+                                                <span>{item?.icon}</span>
+                                                {item.name}
+                                            </a>
+                                        ),
+                                )}
+                            </div>
                         </div>
-                        <h1 className="xl:text-7xl font-bold text-shadow-gray-300 text-shadow-sm">
-                            The Future of Web Development: Trends to Watch in
-                            2025
-                        </h1>
-                        <p>//TODO: #TAG</p>
-                        <p className="text-gray-700 text-xl">Daniel Foster</p>
                     </div>
-                    <div className=" absolute bottom-0">
-                        <img
-                            src={image}
-                            alt=""
-                            className="xl:max-w-4xl rounded-[48px] border-4 border-yellow-600"
-                        />
-                    </div>
+                    {authStatus && userData && (
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                            {/* Profile dropdown */}
+                            <Menu as="div" className="relative ml-3">
+                                <div>
+                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                        <Avatar name={userData?.name} />
+                                    </MenuButton>
+                                </div>
+                                <MenuItems
+                                    transition
+                                    className="absolute right-0 z-10 mt-2 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
+                                >
+                                    <MenuItem>
+                                        <LogoutBtn />
+                                    </MenuItem>
+                                </MenuItems>
+                            </Menu>
+                        </div>
+                    )}
                 </div>
             </div>
-            <div className="max-w-3xl ">
-                Web development is an ever-changing landscape, and as we move
-                closer to 2025, several emerging trends are poised to redefine
-                the way we build digital experiences. One of the most
-                significant shifts well see is the increased adoption of
-                AI-driven development. Tools that leverage artificial
-                intelligence to assist in coding, debugging, and optimizing web
-                applications are becoming more sophisticated, allowing
-                developers to work more efficiently and creatively. Another key
-                trend is the rise of Web3, which encompasses decentralized
-                applications dApps and blockchain technology. Web3 promises to
-                give users more control over their data and digital identities,
-                moving away from centralized platforms. For web developers, this
-                means learning new technologies and paradigms that focus on
-                decentralized protocols and smart contracts. Serverless
-                architecture is also gaining traction, offering developers a way
-                to build and run applications without managing infrastructure.
-                This approach not only reduces operational costs but also allows
-                for greater scalability and faster deployment times. Key
-                Takeaways: AI-driven development will automate repetitive tasks
-                and enhance coding efficiency. Web3 and decentralized
-                applications will require developers to learn new technologies.
-                Serverless architecture will simplify deployment and scaling,
-                making it a must-learn for developers in 2025.
-            </div>
-        </div>
+
+            <DisclosurePanel className="sm:hidden">
+                <div className="space-y-1 px-2 pb-3 pt-2">
+                    {navigation.map(
+                        (item) =>
+                            item.active && (
+                                <DisclosureButton
+                                    key={item.name}
+                                    as="a"
+                                    href={item.href}
+                                    aria-current={
+                                        item.current ? 'page' : undefined
+                                    }
+                                    className={classNames(
+                                        item.current
+                                            ? 'bg-gray-900 text-white'
+                                            : 'text-black hover:bg-gray-700 hover:text-white',
+                                        'block rounded-md px-3 py-2 text-base font-medium',
+                                    )}
+                                >
+                                    {item.name}
+                                </DisclosureButton>
+                            ),
+                    )}
+                </div>
+            </DisclosurePanel>
+        </Disclosure>
     );
 }

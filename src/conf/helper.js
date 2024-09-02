@@ -3,9 +3,9 @@ import { convert as htmlToText } from 'html-to-text';
 // Format the date in user's local timezone
 const formattedDate = (date) =>
     date.toLocaleDateString(undefined, {
-        weekday: 'long',
+        weekday: 'short',
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric',
     });
 

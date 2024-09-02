@@ -14,7 +14,7 @@ const PostCard = ({
 }) => {
     return (
         <Link to={`/post/${slug}-${$id}`}>
-            <div className="w-full hover:bg-[#f2f0ef] duration-500 space-y-2 pb-2 border border-black rounded-3xl 2xl:h-[496px] relative">
+            <div className=" hover:bg-[#f2f0ef] duration-500 space-y-2 pb-2 border border-black rounded-3xl 2xl:h-[496px] relative">
                 <div className="w-full justify-center mb-4 rounded-t-3xl border-dashed border-b border-black">
                     <ImageLoader
                         alt={title}
@@ -35,7 +35,7 @@ const PostCard = ({
                     <h2 className="font-semibold text-2xl line-clamp-2 text-black ">
                         {title}
                     </h2>
-                    <p className="text-lg text-gray-700 absolute 2xl:bottom-3">
+                    <p className="text-lg text-gray-700  2xl:bottom-3">
                         {author}
                     </p>
                 </div>

@@ -1,8 +1,8 @@
 import React from 'react';
 const ShimmerPostCard = () => {
     return (
-        <div className="w-full border border-gray-400 rounded-3xl 2xl:h-[496px] relative space-y-8">
-            <div className="flex items-center justify-center h-3/5 mb-4 rounded-t-3xl  dark:bg-gray-600 bg-gray-300">
+        <div className="w-11/12 mx-auto border border-gray-400 rounded-3xl md:h-[496px] h-80 relative space-y-8 animate-pulse">
+            <div className="flex items-center justify-center md:h-3/5 h-1/2 mb-4 rounded-t-3xl  dark:bg-gray-600 bg-gray-300">
                 <svg
                     className="w-10 h-10 text-gray-400 dark:text-gray-600"
                     aria-hidden="true"

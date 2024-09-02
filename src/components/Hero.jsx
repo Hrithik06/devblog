@@ -4,9 +4,9 @@ import broAnimatedDark from '../assets/blogging-animate-dark.svg';
 import broAnimatedLight from '../assets/blogging-animate-light.svg';
 const Hero = () => {
     return (
-        <div className="flex items-center justify-between ">
+        <div className="flex flex-col md:flex-row items-center justify-between mt-4 md:mt-0">
             <div className="space-y-4">
-                <h1 className="text-6xl">
+                <h1 className="lg:text-6xl md:text-5xl text-3xl">
                     Welcome to
                     <strong>
                         <i> theblog</i>
@@ -14,7 +14,7 @@ const Hero = () => {
                 </h1>
                 <p>Uncovering the World, One Post at a Time.</p>
             </div>
-            <div className="w-[500px]">
+            <div className="xl:w-[500px]">
                 <img
                     src={broAnimatedLight}
                     alt=""

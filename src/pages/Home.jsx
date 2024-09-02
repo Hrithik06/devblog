@@ -34,15 +34,17 @@ function Home() {
             <Container>
                 <Hero />
                 {homeBlogs ? (
-                    <div className="grid grid-cols-2">
+                    <div className="lg:grid grid-cols-2">
                         {homeBlogs?.map((post) => (
-                            <div key={post.$id} className="p-2 ">
+                            <div key={post.$id} className="p-2 h-full">
                                 <PostCard {...post} />
                             </div>
                         ))}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 space-x-4">
+                    <div className="lg:grid grid-cols-2 lg:space-x-4 max-lg:space-y-4">
+                        <ShimmerPostCard />
+                        <ShimmerPostCard />
                         <ShimmerPostCard />
                         <ShimmerPostCard />
                     </div>

@@ -15,7 +15,6 @@ import Input from './Input';
 import Login from './Login';
 import Logo from './Logo';
 import PostCard from './PostCard';
-import PostCardWrapper from './PostCardWrapper';
 import RTE from './RTE';
 import Select from './Select';
 import Signup from './Signup';
@@ -43,7 +42,6 @@ export {
     RTE,
     Select,
     Signup,
-    PostCardWrapper,
     ErrorPage,
     Hero,
     ShimmerPostCard,

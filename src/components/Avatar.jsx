@@ -6,7 +6,9 @@ const Avatar = ({ name }) => {
             ? `${nameArray[0].charAt(0)}${nameArray.pop().charAt(0)}`
             : nameArray[0].charAt(0);
     return (
-        <div className="rounded-full bg-gray-300 py-2 px-2.5">{initials}</div>
+        <div className="rounded-full bg-gray-300 w-9 h-9 flex items-center justify-center m-0">
+            {initials}
+        </div>
     );
 };
 
