@@ -1,23 +1,36 @@
-import React, { useState, useEffect } from 'react';
+// src/App.js
+
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function Demo() {
-    const [message, setMessage] = useState('');
-
-    const test = async () => {
-        await fetch('/api/hello')
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data.message);
-
-                setMessage(data.message);
-            });
-    };
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        test();
+        const fetchData = async () => {
+            try {
+                // Call the serverless function
+                const response = await axios.get('/api/hello'); // Vercel will route this correctly
+                setData(response.data);
+            } catch (err) {
+                setError(`Error: ${err.message}`);
+            }
+        };
+
+        fetchData();
     }, []);
 
-    return <div>{<h1>{console.log(message)}</h1>}</div>;
+    return (
+        <div>
+            {error && <p>{error}</p>}
+            {data ? (
+                <pre>{JSON.stringify(data, null, 2)}</pre>
+            ) : (
+                <p>Loading...</p>
+            )}
+        </div>
+    );
 }
 
 export default Demo;

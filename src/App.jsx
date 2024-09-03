@@ -9,6 +9,22 @@ function App() {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
+    const [message, setMessage] = useState('');
+
+    const test = async () => {
+        await fetch('/api/hello')
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.message);
+
+                setMessage(data.message);
+            });
+    };
+
+    useEffect(() => {
+        test();
+    }, []);
+
     useEffect(() => {
         appwriteAuthService
             .getCurrentUser()
