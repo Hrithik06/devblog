@@ -23,7 +23,7 @@ function App() {
     }, []);
 
     return !loading ? (
-        <div className="min-h-screen flex flex-wrap content-between font-inter bg-[#f3f3f3] max-w-5xl">
+        <div className="min-h-screen flex flex-wrap content-between font-inter bg-[#f3f3f3]">
             <div className="w-full block">
                 <ScrollToTop />
                 <Header />
