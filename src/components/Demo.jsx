@@ -12,7 +12,7 @@ function Demo() {
             try {
                 // Call the serverless function
                 const response = await axios.get('/api/hello'); // Vercel will route this correctly
-                setData(response.data);
+                setData(response.data.message);
             } catch (err) {
                 setError(`Error: ${err.message}`);
             }

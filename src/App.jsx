@@ -9,22 +9,6 @@ function App() {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
 
-    const [message, setMessage] = useState('');
-
-    const test = async () => {
-        await fetch('/api/hello')
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data.message);
-
-                setMessage(data.message);
-            });
-    };
-
-    useEffect(() => {
-        test();
-    }, []);
-
     useEffect(() => {
         appwriteAuthService
             .getCurrentUser()
@@ -39,7 +23,7 @@ function App() {
     }, []);
 
     return !loading ? (
-        <div className="min-h-screen flex flex-wrap content-between font-inter bg-[#f3f3f3]">
+        <div className="min-h-screen flex flex-wrap content-between font-inter bg-[#f3f3f3] max-w-5xl">
             <div className="w-full block">
                 <ScrollToTop />
                 <Header />
