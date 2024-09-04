@@ -33,7 +33,16 @@ class AuthService {
                 email,
                 password,
             );
-            return session;
+            let currentUser;
+            if (session) {
+                currentUser = this.getCurrentUser();
+                // if (currentUser) {
+                //     const jwtResponse = await this.account.createJWT();
+                //     console.log(jwtResponse);
+                // }
+                console.log(currentUser);
+            }
+            return currentUser;
         } catch (error) {
             throw error;
         }
@@ -60,7 +69,6 @@ class AuthService {
 // Vercel Function handler
 export default async function handler(req, res) {
     const authService = new AuthService();
-    console.log(req.body);
 
     try {
         const { action, email, password, name } = req.body;

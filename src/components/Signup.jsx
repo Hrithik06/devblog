@@ -20,6 +20,8 @@ const Signup = () => {
             if (newUserData) {
                 const userData = appwriteAuthService.getCurrentUser();
                 if (userData) dispatch(storeLogin(userData));
+                console.log(userData);
+
                 navigate('/');
             }
         } catch (error) {

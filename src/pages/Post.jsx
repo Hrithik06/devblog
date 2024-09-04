@@ -17,7 +17,6 @@ export default function Post() {
     const authStatus = useSelector((state) => state.auth.status);
 
     const isAuthor = post && userData ? post.userId === userData.$id : false;
-    console.log(isAuthor);
 
     const postId = slug.split('-').pop();
     useEffect(() => {

@@ -83,18 +83,21 @@ const PostForm = ({ post }) => {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={handleSubmit(submitPost)} className="flex flex-wrap">
-            <div className="w-2/3 px-2">
+        <form
+            onSubmit={handleSubmit(submitPost)}
+            className="flex flex-col lg:flex-row"
+        >
+            <div className="px-2 lg:w-2/3">
                 <Input
                     // label="Title :"
                     placeholder="Title"
-                    className="mb-4 p-2 rounded-lg text-3xl"
+                    className="mb-4 rounded-lg p-2 text-3xl"
                     {...register('title', { required: true })}
                 />
                 <Input
                     // label="Slug :"
                     placeholder="Slug"
-                    className="mb-4 p-2 rounded-lg"
+                    className="mb-4 rounded-lg p-2"
                     {...register('slug', { required: true })}
                     onInput={(e) => {
                         setValue('slug', slugTransform(e.currentTarget.value), {
@@ -109,18 +112,18 @@ const PostForm = ({ post }) => {
                     defaultValue={getValues('content')}
                 />
             </div>
-            <div className="w-1/3 px-2">
+            <div className="px-2 lg:w-1/3">
                 <Input
                     label="Featured Image :(PNG, JPG, JPEG, GIF)"
                     type="file"
-                    className="my-2 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-blue-700 hover:file:bg-blue-100"
+                    className="my-2 file:mr-4 file:rounded-full file:border-0 file:bg-violet-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
                     accept="image/png, image/jpg, image/jpeg, image/gif"
                     placeholder="cover-image"
                     {...register('image', { required: !post })}
                 />
 
                 {post && (
-                    <div className="w-full mb-4">
+                    <div className="mb-4 w-full">
                         <img
                             src={appwriteFileService.getFilePreview(
                                 post.featuredImage,
@@ -140,13 +143,13 @@ const PostForm = ({ post }) => {
                 <Select
                     options={['active', 'inactive']}
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 w-32"
                     {...register('status', { required: true })}
                 />
                 <Button
                     type="submit"
                     bgColor={post ? undefined : 'bg-green-500'}
-                    className="w-full text-white"
+                    className="w-1/2 text-white lg:w-full"
                 >
                     {post ? 'Update' : 'Publish'}
                 </Button>

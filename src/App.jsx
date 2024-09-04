@@ -4,6 +4,7 @@ import appwriteAuthService from './appwrite/auth';
 import { login, logout } from './store/authSlice';
 import { Footer, Header, Loader, ScrollToTop } from './components';
 import { Outlet } from 'react-router-dom';
+import Header_Old from './components/Header/Header_Old';
 
 function App() {
     const [loading, setLoading] = useState(true);

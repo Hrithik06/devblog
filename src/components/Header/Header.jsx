@@ -19,21 +19,21 @@ export default function Header() {
     const authStatus = useSelector((store) => store.auth.status);
     const userData = useSelector((store) => store.auth.userData);
     const navigation = [
-        { name: 'Home', href: '/', active: true },
-        { name: 'Login', href: '/login', active: !authStatus },
+        { name: 'Home', to: '/', active: true },
+        { name: 'Login', to: '/login', active: !authStatus },
         {
             name: 'Create Account',
-            href: '/signup',
+            to: '/signup',
             active: !authStatus,
         },
         {
             name: 'My Posts',
-            href: '/my-posts',
+            to: '/my-posts',
             active: authStatus,
         },
         {
             name: 'Write',
-            href: '/new',
+            to: '/new',
             active: authStatus,
             icon: (
                 <svg
@@ -89,20 +89,23 @@ export default function Header() {
                         </DisclosureButton>
                     </div>
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
-                        <Logo />
+                        <Link to="/">
+                            <Logo />
+                        </Link>
+
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 {navigation.map(
                                     (item) =>
                                         item.active && (
-                                            <a
+                                            <Link
                                                 key={item.name}
-                                                href={item.href}
-                                                className="flex items-center gap-1"
+                                                to={item.to}
+                                                className="flex items-center gap-1 rounded-full px-3 py-2 duration-500 hover:bg-blue-200"
                                             >
                                                 <span>{item?.icon}</span>
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ),
                                 )}
                             </div>
@@ -113,7 +116,7 @@ export default function Header() {
                             {/* Profile dropdown */}
                             <Menu as="div" className="relative ml-3">
                                 <div>
-                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm ring-offset-gray-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
                                         <Avatar name={userData?.name} />
                                     </MenuButton>
                                 </div>
@@ -139,9 +142,9 @@ export default function Header() {
                                 <DisclosureButton
                                     key={item.name}
                                     as="a"
-                                    href={item.href}
+                                    to={item.to}
                                     className={
-                                        'text-black hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium'
+                                        'block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-gray-700 hover:text-white'
                                     }
                                 >
                                     {item.name}
