@@ -1,5 +1,5 @@
 import { Client, Account, ID } from 'appwrite';
-
+import jwt from 'jsonwebtoken';
 // Define AuthService class
 class AuthService {
     constructor() {
@@ -33,16 +33,19 @@ class AuthService {
                 email,
                 password,
             );
-            let currentUser;
+            let token;
             if (session) {
-                currentUser = this.getCurrentUser();
-                // if (currentUser) {
-                //     const jwtResponse = await this.account.createJWT();
-                //     console.log(jwtResponse);
-                // }
-                console.log(currentUser);
+                // Generate JWT
+                token = jwt.sign(
+                    { userId: session.userId },
+                    process.env.JWT_SECRET,
+                    { expiresIn: '1h' },
+                );
+                // Verify JWT
+                const decoded = jwt.verify(token, process.env.JWT_SECRET);
             }
-            return currentUser;
+
+            return token;
         } catch (error) {
             throw error;
         }
@@ -69,7 +72,6 @@ class AuthService {
 // Vercel Function handler
 export default async function handler(req, res) {
     const authService = new AuthService();
-
     try {
         const { action, email, password, name } = req.body;
         let result;

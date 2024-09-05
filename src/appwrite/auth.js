@@ -1,6 +1,5 @@
 import conf from '../conf/conf';
 import { Client, Account, ID } from 'appwrite';
-
 class AuthService {
     client = new Client();
     account;
@@ -36,6 +35,7 @@ class AuthService {
                 email,
                 password,
             );
+
             return session;
         } catch (error) {
             throw error;
