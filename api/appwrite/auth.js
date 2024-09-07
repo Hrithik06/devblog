@@ -37,6 +37,8 @@ class AuthService {
     }
 
     async login({ email, password }) {
+        console.log(this.account);
+
         try {
             const session = await this.account.createEmailPasswordSession(
                 email,
@@ -45,12 +47,17 @@ class AuthService {
             if (session) {
                 // Generate JWT
                 const token = jwt.sign(
-                    { userId: session.userId },
+                    { userId: session.userId, sessionId: session.$id },
                     process.env.JWT_SECRET,
                     { expiresIn: '1h' },
                 );
                 // Verify JWT
                 // const decoded = jwt.verify(token, process.env.JWT_SECRET);
+                const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+                const userId = decodedToken.userId;
+                const sessionId = decodedToken.sessionId;
+                console.log('Login fun: ', userId, sessionId);
+
                 return token;
             }
 
@@ -72,14 +79,17 @@ class AuthService {
     }
 
     async logout() {
-        try {
-            await this.account.deleteSessions();
-            console.log('Session has been deleted successfully.');
-            return true; // Indicates success
-        } catch (error) {
-            console.log('Appwrite service :: logout error :: ', error);
-            throw new Error('Failed to log out.');
-        }
+        console.log('logout Function');
+        console.log(this.account);
+        return true;
+        // try {
+        //     await this.account.deleteSessions();
+        //     console.log('Session has been deleted successfully.');
+        //     return true; // Indicates success
+        // } catch (error) {
+        //     console.log('Appwrite service :: logout error :: ', error);
+        //     throw new Error('Failed to log out.');
+        // }
     }
 }
 
@@ -100,12 +110,17 @@ export default async function handler(req, res) {
                 });
 
                 if (newAccountJWT) {
-                    cookie = serialize('token', newAccountJWT, {
+                    const maxAge = 60 * 60 * 24 * 7; // 7 days in seconds
+                    const expires = new Date(Date.now() + maxAge * 1000);
+                    const cookieOptions = {
                         httpOnly: true,
                         secure: true,
                         sameSite: 'strict',
                         path: '/',
-                    });
+                        maxAge: maxAge,
+                        expires: expires,
+                    };
+                    cookie = serialize('token', newAccountJWT, cookieOptions);
                     res.setHeader('Set-Cookie', cookie);
                     result = res
                         .status(201)
@@ -122,12 +137,17 @@ export default async function handler(req, res) {
                     password,
                 });
                 if (loginJWT) {
-                    cookie = serialize('token', loginJWT, {
+                    const maxAge = 60 * 60 * 24 * 7; // 7 days in seconds
+                    const expires = new Date(Date.now() + maxAge * 1000);
+                    const cookieOptions = {
                         httpOnly: true,
                         secure: true,
                         sameSite: 'strict',
                         path: '/',
-                    });
+                        maxAge: maxAge,
+                        expires: expires,
+                    };
+                    cookie = serialize('token', loginJWT, cookieOptions);
                     res.setHeader('Set-Cookie', cookie);
                     result = res.status(200).json({ message: 'Login success' });
                 } else {
@@ -146,14 +166,18 @@ export default async function handler(req, res) {
                         .json({ message: 'User not authenticated' });
                 }
             case 'logout':
-                // const cookies = parse(req.headers.cookie || '');
-                // console.log(cookies);
+                const cookies = parse(req.headers.cookie || '');
+                console.log(cookies);
 
-                // // Access specific cookie
-                // const token = cookies.token;
-                // console.log(token);
+                // Access specific cookie
 
-                const logoutSuccess = await authService.logout();
+                const token = cookies.token;
+                const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+                const userId = decodedToken.userId;
+                const sessionId = decodedToken.sessionId;
+                console.log('Logout API: ', userId, sessionId);
+
+                const logoutSuccess = await authService.logout(sessionId);
                 // console.log(logoutSuccess);
 
                 if (logoutSuccess) {

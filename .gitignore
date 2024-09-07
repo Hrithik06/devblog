@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .vercel
+api
+conf
+src/components/Demo.jsx
+src/components/Header/Header_Old.jsx

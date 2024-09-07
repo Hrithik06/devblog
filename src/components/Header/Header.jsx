@@ -20,7 +20,7 @@ export default function Header() {
     const userData = useSelector((store) => store.auth.userData);
     const navigation = [
         { name: 'Home', to: '/', active: true },
-        { name: 'Demo', to: '/demo', active: true },
+        // { name: 'Demo', to: '/demo', active: true },
         { name: 'Login', to: '/login', active: !authStatus },
         {
             name: 'Create Account',

@@ -11,9 +11,11 @@ function Demo() {
     const [errorMsg, setErrorMsg] = useState('');
 
     const handleLogin = async (formData) => {
+        console.log('handleLogin');
+
         try {
             const response = await axios.post(
-                '/api/appwrite/auth',
+                '/api/appwrite/newauth',
                 {
                     action: 'login',
                     ...formData,
@@ -38,7 +40,7 @@ function Demo() {
     const handleLogout = async () => {
         try {
             const response = await axios.post(
-                '/api/appwrite/auth',
+                '/api/appwrite/newauth',
                 {
                     action: 'logout',
                 },
@@ -46,7 +48,7 @@ function Demo() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    // withCredentials: true,
+                    withCredentials: true,
                 },
             );
 
@@ -61,7 +63,7 @@ function Demo() {
         setErrorMsg('');
         try {
             const response = await axios.post(
-                '/api/appwrite/auth',
+                '/api/appwrite/newauth',
                 {
                     action: 'createAccount',
                     ...formData,
@@ -147,22 +149,7 @@ function Demo() {
                 </form>
                 <Button onClick={handleLogout}>Logout</Button>
             </div>
-            <div // const handleSignUp = async (data) => {
-                //     setErrorMsg('');
-                //     try {
-                //         //this returns a session
-                //         const newUserData = appwriteAuthService.createAccount(data);
-                //         if (newUserData) {
-                //             const userData = appwriteAuthService.getCurrentUser();
-                //             if (userData) dispatch(storeLogin(userData));
-                //             console.log(userData);
-
-                //             navigate('/');
-                //         }
-                //     } catch (error) {
-                //         setErrorMsg(error.message);
-                //     }
-                // };
+            {/* <div
                 className={`mx-auto w-full max-w-lg rounded-xl border border-black/10 bg-gray-100 p-10`}
             >
                 <div className="mb-2 flex justify-center">
@@ -229,7 +216,7 @@ function Demo() {
                         Sign Up
                     </Button>
                 </form>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -4,7 +4,6 @@ import appwriteAuthService from './appwrite/auth';
 import { login, logout } from './store/authSlice';
 import { Footer, Header, Loader, ScrollToTop } from './components';
 import { Outlet } from 'react-router-dom';
-import Header_Old from './components/Header/Header_Old';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -24,8 +23,8 @@ function App() {
     }, []);
 
     return !loading ? (
-        <div className="min-h-screen flex flex-wrap content-between font-inter bg-[#f3f3f3]">
-            <div className="w-full block">
+        <div className="flex min-h-screen flex-wrap content-between bg-[#f3f3f3] font-inter">
+            <div className="block w-full">
                 <ScrollToTop />
                 <Header />
                 <main className="">
@@ -35,12 +34,6 @@ function App() {
             </div>
         </div>
     ) : (
-        // <div className="flex items-center justify-center h-screen">
-        //     <div className="relative">
-        //         <div className="h-24 w-24 rounded-full border-t-8 border-b-8 border-gray-200"></div>
-        //         <div className="absolute top-0 left-0 h-24 w-24 rounded-full border-t-8 border-b-8 border-blue-500 animate-spin"></div>
-        //     </div>
-        // </div>
         <Loader />
     );
 }
