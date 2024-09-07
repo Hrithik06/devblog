@@ -54,8 +54,6 @@ class AuthService {
 
     async logout() {
         try {
-            console.log(this.account);
-
             await this.account.deleteSessions();
             console.log('Session has been deleted successfully.');
             return true; // Indicates success

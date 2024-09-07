@@ -20,8 +20,6 @@ const Signup = () => {
             if (newUserData) {
                 const userData = appwriteAuthService.getCurrentUser();
                 if (userData) dispatch(storeLogin(userData));
-                console.log(userData);
-
                 navigate('/');
             }
         } catch (error) {
@@ -29,9 +27,9 @@ const Signup = () => {
         }
     };
     return (
-        <div className="flex items-center justify-center w-full">
+        <div className="flex w-full items-center justify-center">
             <div
-                className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+                className={`mx-auto w-full max-w-lg rounded-xl border border-black/10 bg-gray-100 p-10`}
             >
                 <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -45,14 +43,14 @@ const Signup = () => {
                     Already have an account?&nbsp;
                     <Link
                         to="/login"
-                        className="font-medium text-primary transition-all duration-200 text-blue-700 hover:underline"
+                        className="text-primary font-medium text-blue-700 transition-all duration-200 hover:underline"
                     >
                         Sign In
                     </Link>
                 </p>
 
                 {errorMsg && (
-                    <p className="text-red-600 mt-8 text-center">{errorMsg}</p>
+                    <p className="mt-8 text-center text-red-600">{errorMsg}</p>
                 )}
                 <form
                     onSubmit={handleSubmit(handleSignUp)}
@@ -62,7 +60,7 @@ const Signup = () => {
                         label="Name"
                         type="text"
                         placeholder="John Doe"
-                        className="p-2 rounded-lg"
+                        className="rounded-lg p-2"
                         {...register('name', {
                             required: true,
                         })}
@@ -71,7 +69,7 @@ const Signup = () => {
                         label="Email"
                         type="email"
                         placeholder="johndoe@abc.com"
-                        className="p-2 rounded-lg"
+                        className="rounded-lg p-2"
                         {...register('email', {
                             required: true,
                             validate: {
@@ -88,7 +86,7 @@ const Signup = () => {
                         label="Password"
                         type="password"
                         placeholder="Enter Password"
-                        className="p-2 rounded-lg"
+                        className="rounded-lg p-2"
                         {...register('password', {
                             required: true,
                         })}
