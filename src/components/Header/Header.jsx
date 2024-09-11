@@ -9,7 +9,7 @@ import {
 } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo, Container, LogoutBtn, Avatar } from '../index';
 import { useSelector } from 'react-redux';
@@ -70,6 +70,9 @@ export default function Header() {
             ),
         },
     ];
+    useEffect(() => {
+        console.log('userdata');
+    }, [userData]);
     return (
         <Disclosure as="nav" className="">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -112,12 +115,13 @@ export default function Header() {
                             </div>
                         </div>
                     </div>
-                    {authStatus && userData && (
+                    {authStatus && userData?.name && (
                         <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                             {/* Profile dropdown */}
                             <Menu as="div" className="relative ml-3">
                                 <div>
                                     <MenuButton className="relative flex rounded-full bg-gray-800 text-sm ring-offset-gray-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
+                                        {console.log(userData)}
                                         <Avatar name={userData?.name} />
                                     </MenuButton>
                                 </div>

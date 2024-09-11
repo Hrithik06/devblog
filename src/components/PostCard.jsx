@@ -12,8 +12,6 @@ const PostCard = ({
     slug,
     timeToRead,
 }) => {
-    console.log($createdAt);
-
     return (
         <Link to={`/post/${slug}-${$id}`}>
             <div className="relative space-y-2 rounded-3xl border border-black pb-2 duration-500 hover:bg-[#f2f0ef] 2xl:h-[496px]">
