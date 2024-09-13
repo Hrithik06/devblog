@@ -1,10 +1,9 @@
-import React from 'react';
 const ShimmerPostCard = () => {
     return (
-        <div className="w-11/12 mx-auto border border-gray-400 rounded-3xl md:h-[496px] h-80 relative space-y-8 animate-pulse">
-            <div className="flex items-center justify-center md:h-3/5 h-1/2 mb-4 rounded-t-3xl  dark:bg-gray-600 bg-gray-300">
+        <div className="relative mx-auto h-80 w-11/12 animate-pulse space-y-8 rounded-3xl border border-gray-400 md:h-[496px]">
+            <div className="mb-4 flex h-1/2 items-center justify-center rounded-t-3xl bg-gray-300 md:h-3/5 dark:bg-gray-600">
                 <svg
-                    className="w-10 h-10 text-gray-400 dark:text-gray-600"
+                    className="h-10 w-10 text-gray-400 dark:text-gray-600"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -15,10 +14,10 @@ const ShimmerPostCard = () => {
                 </svg>
             </div>
             <div className="mx-4 space-y-4">
-                <div className="h-3 bg-gray-300 rounded-md dark:bg-gray-600 w-48 mb-4"></div>
-                <div className="h-3 bg-gray-300 rounded-md dark:bg-gray-600 mb-2.5"></div>
-                <div className="h-3 bg-gray-300 rounded-md dark:bg-gray-600 mb-2.5"></div>
-                <div className="h-3 bg-gray-300 rounded-md dark:bg-gray-600"></div>
+                <div className="mb-4 h-3 w-48 rounded-md bg-gray-300 dark:bg-gray-600"></div>
+                <div className="mb-2.5 h-3 rounded-md bg-gray-300 dark:bg-gray-600"></div>
+                <div className="mb-2.5 h-3 rounded-md bg-gray-300 dark:bg-gray-600"></div>
+                <div className="h-3 rounded-md bg-gray-300 dark:bg-gray-600"></div>
             </div>
         </div>
     );

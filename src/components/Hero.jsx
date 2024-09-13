@@ -1,12 +1,11 @@
-import React from 'react';
 // import bloggingBro from '../assets/Blogging-bro.svg';
 import broAnimatedDark from '../assets/blogging-animate-dark.svg';
 import broAnimatedLight from '../assets/blogging-animate-light.svg';
 const Hero = () => {
     return (
-        <div className="flex flex-col md:flex-row items-center justify-between mt-4 md:mt-0">
+        <div className="mt-4 flex flex-col items-center justify-between md:mt-0 md:flex-row">
             <div className="space-y-4">
-                <h1 className="lg:text-6xl md:text-5xl text-3xl">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl">
                     Welcome to
                     <strong>
                         <i> theblog</i>
@@ -18,7 +17,7 @@ const Hero = () => {
                 <img
                     src={broAnimatedLight}
                     alt=""
-                    className="w-full hover:scale-110 duration-500"
+                    className="w-full duration-500 hover:scale-110"
                 />
                 {/* <img src={broAnimatedDark} alt="" /> */}
             </div>

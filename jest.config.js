@@ -92,6 +92,7 @@ const config = {
     // moduleNameMapper: {},
     moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
+        '^.+\\.svg$': 'jest-svg-transformer',
     },
     // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
     // modulePathIgnorePatterns: [],
@@ -139,6 +140,7 @@ const config = {
 
     // A list of paths to modules that run some code to configure or set up the testing framework before each test
     // setupFilesAfterEnv: [],
+    setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
     // The number of seconds after which a test is considered as slow and reported as such in the results.
     // slowTestThreshold: 5,

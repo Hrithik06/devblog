@@ -1,5 +1,3 @@
-import React from 'react';
-import fileService from '../appwrite/file';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../conf/helper';
 import { ImageLoader } from './index';

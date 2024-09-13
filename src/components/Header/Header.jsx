@@ -11,9 +11,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Logo, Container, LogoutBtn, Avatar } from '../index';
+import { Logo, LogoutBtn, Avatar } from '../index';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const authStatus = useSelector((store) => store.auth.status);
@@ -57,22 +56,21 @@ export default function Header() {
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                        ></path>{' '}
+                        ></path>
                         <path
                             d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13"
                             stroke="#000000"
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                        ></path>{' '}
+                        ></path>
                     </g>
                 </svg>
             ),
         },
     ];
-    useEffect(() => {
-        console.log('userdata');
-    }, [userData]);
+    useEffect(() => {}, [userData]);
+    //FIXME:When user signsup Header doesnt show Avatar immediately it shows only if refreshed
     return (
         <Disclosure as="nav" className="">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -107,8 +105,16 @@ export default function Header() {
                                                 to={item.to}
                                                 className="flex items-center gap-1 rounded-full px-3 py-2 duration-500 hover:bg-blue-200"
                                             >
-                                                <span>{item?.icon}</span>
-                                                {item.name}
+                                                <button
+                                                    className={`flex items-center gap-1`}
+                                                >
+                                                    {item?.icon && (
+                                                        <span>
+                                                            {item?.icon}
+                                                        </span>
+                                                    )}
+                                                    {item.name}
+                                                </button>
                                             </Link>
                                         ),
                                 )}
@@ -120,8 +126,7 @@ export default function Header() {
                             {/* Profile dropdown */}
                             <Menu as="div" className="relative ml-3">
                                 <div>
-                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm ring-offset-gray-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
-                                        {console.log(userData)}
+                                    <MenuButton className="relative flex rounded-full bg-gray-800 text-sm ring-offset-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
                                         <Avatar name={userData?.name} />
                                     </MenuButton>
                                 </div>

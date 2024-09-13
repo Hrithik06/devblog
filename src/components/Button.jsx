@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Button = ({
     children,
     type = 'button',
@@ -10,7 +8,7 @@ const Button = ({
 }) => {
     return (
         <button
-            className={`px-4 py-2 rounded-lg ${bgColor} ${textColor} ${className} ${type}`}
+            className={`rounded-lg px-4 py-2 ${bgColor} ${textColor} ${className} ${type}`}
             {...props}
         >
             {children}
