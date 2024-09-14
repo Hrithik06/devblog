@@ -28,3 +28,4 @@ conf
 src/components/Demo.jsx
 src/components/Header/Header_Old.jsx
 # coverage
+extraData.js

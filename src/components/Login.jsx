@@ -66,7 +66,12 @@ function Login() {
                     </Link>
                 </p>
                 {errorMsg && (
-                    <p className="mt-8 text-center text-red-600">{errorMsg}</p>
+                    <p
+                        className="mt-8 text-center text-red-600"
+                        data-testid="errorMsg"
+                    >
+                        {errorMsg}
+                    </p>
                 )}
                 <form onSubmit={handleSubmit(handleLogin)} className="mt-8">
                     <div className="space-y-5">
