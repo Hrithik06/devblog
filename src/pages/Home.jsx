@@ -8,7 +8,6 @@ function Home() {
     // const [posts, setPosts] = useState([]);
     const dispatch = useDispatch();
     const homeBlogs = useSelector((store) => store.home.homeBlogs);
-    console.log(homeBlogs);
 
     useEffect(() => {
         !homeBlogs &&
