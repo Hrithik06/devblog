@@ -18,6 +18,7 @@ function Login() {
         setErrorMsg('');
         try {
             const session = await appwriteAuthService.login(data);
+            console.log(session);
 
             if (session) {
                 const user = await appwriteAuthService.getCurrentUser();
@@ -36,9 +37,9 @@ function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center w-full">
+        <div className="flex w-full items-center justify-center">
             <div
-                className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}
+                className={`mx-auto w-full max-w-lg rounded-xl border border-black/10 bg-gray-100 p-10`}
             >
                 {/* <div className="text-right">
                     <Button
@@ -60,13 +61,13 @@ function Login() {
                     Don&apos;t have any account?&nbsp;
                     <Link
                         to="/signup"
-                        className="font-medium text-primary transition-all duration-200 text-blue-700 hover:underline"
+                        className="text-primary font-medium text-blue-700 transition-all duration-200 hover:underline"
                     >
                         Sign Up
                     </Link>
                 </p>
                 {errorMsg && (
-                    <p className="text-red-600 mt-8 text-center">{errorMsg}</p>
+                    <p className="mt-8 text-center text-red-600">{errorMsg}</p>
                 )}
                 <form onSubmit={handleSubmit(handleLogin)} className="mt-8">
                     <div className="space-y-5">
@@ -74,7 +75,8 @@ function Login() {
                             label="Email"
                             placeholder="johndoe@abc.com"
                             type="email"
-                            className="p-2 rounded-lg"
+                            data-testid="email"
+                            className="rounded-lg p-2"
                             {...register('email', {
                                 required: true,
                                 validate: {
@@ -89,8 +91,9 @@ function Login() {
                         <Input
                             label="Password"
                             type="password"
+                            data-testid="password"
                             placeholder="Enter password"
-                            className="p-2 rounded-lg"
+                            className="rounded-lg p-2"
                             {...register('password', {
                                 required: true,
                             })}

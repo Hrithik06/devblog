@@ -1,0 +1,19 @@
+{
+    "title": "The Benefits of Meditation for Remote Workers",
+    "featuredImage": "66c09c350020d5f2436f",
+    "status": "active",
+    "userId": "66bcbb650006c0115e0d",
+    "author": "Emily Carter",
+    "slug": "the-benefits-of-meditation-for-remote-workers",
+    "timeToRead": "<1 min read",
+    "$id": "66bccf51003698a054ce",
+    "$createdAt": "2024-08-14T15:37:53.136+00:00",
+    "$updatedAt": "2024-08-17T12:48:55.717+00:00",
+    "$permissions": [
+        "read(\"user:66bcbb650006c0115e0d\")",
+        "update(\"user:66bcbb650006c0115e0d\")",
+        "delete(\"user:66bcbb650006c0115e0d\")"
+    ],
+    "$databaseId": "66b46170001d07494891",
+    "$collectionId": "66b4618e0005860caad6"
+}

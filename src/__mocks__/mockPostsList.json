@@ -1,0 +1,192 @@
+[
+    {
+        "title": "The Benefits of Meditation for Remote Workers",
+        "featuredImage": "66c09c350020d5f2436f",
+        "status": "active",
+        "userId": "66bcbb650006c0115e0d",
+        "author": "Emily Carter",
+        "slug": "the-benefits-of-meditation-for-remote-workers",
+        "timeToRead": "<1 min read",
+        "$id": "66bccf51003698a054ce",
+        "$createdAt": "2024-08-14T15:37:53.136+00:00",
+        "$updatedAt": "2024-08-17T12:48:55.717+00:00",
+        "$permissions": [
+            "read(\"user:66bcbb650006c0115e0d\")",
+            "update(\"user:66bcbb650006c0115e0d\")",
+            "delete(\"user:66bcbb650006c0115e0d\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "Why Sustainable Design Matters in 2024",
+        "featuredImage": "66c0a05f001e1c561948",
+        "status": "active",
+        "userId": "66bcbb790021b1fd8205",
+        "author": "Michael Thompson",
+        "slug": "why-sustainable-design-matters-in-2024",
+        "timeToRead": "<1 min read",
+        "$id": "66bce515002b6b456d7b",
+        "$createdAt": "2024-08-14T17:10:45.134+00:00",
+        "$updatedAt": "2024-08-21T15:30:27.211+00:00",
+        "$permissions": [
+            "read(\"user:66bcbb790021b1fd8205\")",
+            "update(\"user:66bcbb790021b1fd8205\")",
+            "delete(\"user:66bcbb790021b1fd8205\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "How to Create Engaging Content for Your Blog",
+        "featuredImage": "66c09ddd00108f615f14",
+        "status": "active",
+        "userId": "66bcbb8900259797d500",
+        "author": "Sophia Brooks",
+        "slug": "how-to-create-engaging-content-for-your-blog",
+        "timeToRead": "< 1 min read",
+        "$id": "66bdae23003263e2a361",
+        "$createdAt": "2024-08-15T07:28:34.922+00:00",
+        "$updatedAt": "2024-08-21T14:51:16.114+00:00",
+        "$permissions": [
+            "read(\"user:66bcbb8900259797d500\")",
+            "update(\"user:66bcbb8900259797d500\")",
+            "delete(\"user:66bcbb8900259797d500\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "The Future of Web Development: Trends to Watch in 2025",
+        "featuredImage": "66c09e570019877a3736",
+        "status": "active",
+        "userId": "66bcbb9e0039d5fc3dd6",
+        "author": "Daniel Foster",
+        "slug": "the-future-of-web-development-trends-to-watch-in-2025",
+        "timeToRead": "< 1 min read",
+        "$id": "66bdae8a002a2d68f38f",
+        "$createdAt": "2024-08-15T07:30:18.403+00:00",
+        "$updatedAt": "2024-08-21T14:51:27.382+00:00",
+        "$permissions": [
+            "read(\"user:66bcbb9e0039d5fc3dd6\")",
+            "update(\"user:66bcbb9e0039d5fc3dd6\")",
+            "delete(\"user:66bcbb9e0039d5fc3dd6\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "Unveiling the Enchantment of Bali: A Backpacker's Paradise",
+        "featuredImage": "66c029fd003983fefb8c",
+        "status": "active",
+        "userId": "66bcbc33000986829c22",
+        "author": "Olivia Mitchell",
+        "slug": "unveiling-the-enchantment-of-bali-a-backpacker-s-paradise",
+        "timeToRead": "2 min read",
+        "$id": "66bdb593000c7e08fca2",
+        "$createdAt": "2024-08-15T08:00:18.307+00:00",
+        "$updatedAt": "2024-08-17T04:41:36.259+00:00",
+        "$permissions": [
+            "read(\"user:66bcbc33000986829c22\")",
+            "update(\"user:66bcbc33000986829c22\")",
+            "delete(\"user:66bcbc33000986829c22\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "Breaking Down Movies: The Art and Science of Cinematography",
+        "featuredImage": "66c02bf4002815be2d73",
+        "status": "active",
+        "userId": "66bcbc5900013f743bc7",
+        "author": "James Walker",
+        "slug": "breaking-down-movies-the-art-and-science-of-cinematography",
+        "timeToRead": "2 min read",
+        "$id": "66bdb67e0016a3843eee",
+        "$createdAt": "2024-08-15T08:04:13.527+00:00",
+        "$updatedAt": "2024-08-17T04:50:00.229+00:00",
+        "$permissions": [
+            "read(\"user:66bcbc5900013f743bc7\")",
+            "update(\"user:66bcbc5900013f743bc7\")",
+            "delete(\"user:66bcbc5900013f743bc7\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "A Kaleidoscope of Color: Exploring Color Theory and Psychology",
+        "featuredImage": "66bf8fe700212b2bfaa9",
+        "status": "active",
+        "userId": "66bcbc6f000e7676b471",
+        "author": "Ava Richardson",
+        "slug": "a-kaleidoscope-of-color-exploring-color-theory-and-psychology",
+        "timeToRead": "2 min read",
+        "$id": "66bf1bb2000a81a86cec",
+        "$createdAt": "2024-08-16T09:28:17.115+00:00",
+        "$updatedAt": "2024-08-16T17:44:11.009+00:00",
+        "$permissions": [
+            "read(\"user:66bcbc6f000e7676b471\")",
+            "update(\"user:66bcbc6f000e7676b471\")",
+            "delete(\"user:66bcbc6f000e7676b471\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "The Fascination of Time Travel: Exploring Its Possibilities and Paradoxes",
+        "featuredImage": "66c629900007ed5134c9",
+        "status": "active",
+        "userId": "66bcbc9e000f9b10df50",
+        "author": "Benjamin Hayes",
+        "slug": "the-fascination-of-time-travel-exploring-its-possibilities-and-paradoxes",
+        "timeToRead": "5 min read",
+        "$id": "66c62993001a2a21cbab",
+        "$createdAt": "2024-08-21T17:53:22.734+00:00",
+        "$updatedAt": "2024-08-21T17:53:22.734+00:00",
+        "$permissions": [
+            "read(\"user:66bcbc9e000f9b10df50\")",
+            "update(\"user:66bcbc9e000f9b10df50\")",
+            "delete(\"user:66bcbc9e000f9b10df50\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "The Secret Life of Plants: A Closer Look at Nature's Silent Wonders",
+        "featuredImage": "66c62d5600293abf5818",
+        "status": "active",
+        "userId": "66bcbc9e000f9b10df50",
+        "author": "Benjamin Hayes",
+        "slug": "the-secret-life-of-plants-a-closer-look-at-nature-s-silent-wonders",
+        "timeToRead": "3 min read",
+        "$id": "66c62d5a00015b0cbf04",
+        "$createdAt": "2024-08-21T18:09:29.201+00:00",
+        "$updatedAt": "2024-08-21T18:09:29.201+00:00",
+        "$permissions": [
+            "read(\"user:66bcbc9e000f9b10df50\")",
+            "update(\"user:66bcbc9e000f9b10df50\")",
+            "delete(\"user:66bcbc9e000f9b10df50\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    },
+    {
+        "title": "The Rise of Artificial Intelligence: Transforming Society, Economy, and the Future",
+        "featuredImage": "66c7349b00158aefc515",
+        "status": "active",
+        "userId": "66bcbcb0000b22e4bf66",
+        "author": "Mia Anderson",
+        "slug": "the-rise-of-artificial-intelligence-transforming-society-economy-and-the-future",
+        "timeToRead": "7 min read",
+        "$id": "66c62fc3001b5f9fd500",
+        "$createdAt": "2024-08-21T18:19:46.749+00:00",
+        "$updatedAt": "2024-08-22T12:52:43.209+00:00",
+        "$permissions": [
+            "read(\"user:66bcbcb0000b22e4bf66\")",
+            "update(\"user:66bcbcb0000b22e4bf66\")",
+            "delete(\"user:66bcbcb0000b22e4bf66\")"
+        ],
+        "$databaseId": "66b46170001d07494891",
+        "$collectionId": "66b4618e0005860caad6"
+    }
+]
