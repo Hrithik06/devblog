@@ -17,6 +17,8 @@ const Signup = () => {
         try {
             //this returns a session
             const newUserData = appwriteAuthService.createAccount(data);
+            console.log(newUserData);
+
             if (newUserData) {
                 const userData = appwriteAuthService.getCurrentUser();
                 if (userData) dispatch(storeLogin(userData));
